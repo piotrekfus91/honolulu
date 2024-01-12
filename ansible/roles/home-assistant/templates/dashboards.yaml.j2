@@ -1,0 +1,9 @@
+{%- for dashboard in dashboards %}
+
+{{ dashboard.id }}:
+  mode: yaml
+  title: {{ dashboard.title }}
+  icon: {{ dashboard.icon }}
+  show_in_sidebar: true
+  filename: dashboards/{{ dashboard.filename }}
+{% endfor %}

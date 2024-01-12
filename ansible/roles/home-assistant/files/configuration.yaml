@@ -21,3 +21,7 @@ panel_iframe:
     icon: mdi:zigbee
     url: http://haos.honolulu.org:8099
     require_admin: true
+
+lovelace:
+  mode: yaml
+  dashboards: !include dashboards.yaml

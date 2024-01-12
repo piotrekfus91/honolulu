@@ -1,0 +1,5 @@
+dashboards:
+  - id: dashboard-light
+    title: Oświetlenie
+    icon: mdi:lightbulb
+    filename: light.yaml

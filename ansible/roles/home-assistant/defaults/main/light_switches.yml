@@ -1,0 +1,33 @@
+light_switches:
+  - device_id: office_light_switch
+    friendly_name: Gabinet światło
+    area_id: office
+    dimmable: true
+    floor: ground
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Biurko Piotrka
+      - id: L2
+        suffix: _l2
+        name: Biurko Moniki
+
+  - device_id: "0xa4c13834a0a68079"
+    friendly_name: Salon światło
+    area_id: living_room
+    dimmable: true
+    floor: ground
+    parts:
+      - id: L1
+        suffix:
+        name: Salon
+
+  - device_id: dining_room_light_switch
+    friendly_name: Jadalnia światło
+    area_id: living_room
+    dimmable: true
+    floor: ground
+    parts:
+      - id: L1
+        suffix:
+        name: Jadalnia

@@ -1,0 +1,11 @@
+views:
+  - title: Parter
+    cards:
+    {%- for light in light_switches if light.floor == 'ground' %}
+      {%- for light_part in light.parts %}
+
+      - type: light
+        entity: light.{{light.device_id }}{{ light_part.suffix }}
+        name: {{ light_part.name }}
+      {% endfor %}
+    {% endfor %}

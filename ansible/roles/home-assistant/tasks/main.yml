@@ -2,3 +2,19 @@
   copy:
     src: configuration.yaml
     dest: config/configuration.yaml
+
+- name: create dashboard dir
+  file:
+    path: config/dashboards
+    state: directory
+
+- name: upload lovelace.yaml
+  template:
+    src: dashboards.yaml.j2
+    dest: config/dashboards.yaml
+
+- name: copy dashboards
+  template:
+    src: "{{ item }}"
+    dest: "config/dashboards/{{ item | basename | regex_replace('\\.j2$', '') }}"
+  with_fileglob: "{{ role_path }}/templates/dashboards/**.yaml.j2"
