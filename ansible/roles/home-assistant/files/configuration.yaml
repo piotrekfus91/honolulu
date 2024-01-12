@@ -1,0 +1,16 @@
+homeassistant:
+  name: Honolulu
+  latitude: %LATITUDE%
+  longitude: %LONGITUDE%
+  elevation: 121
+  unit_system: metric
+  temperature_unit: C
+  time_zone: Europe/Warsaw
+  currency: PLN
+  country: PL
+  language: pl
+  internal_url: "http://haos.honolulu.org:8123"
+
+http:
+
+default_config:

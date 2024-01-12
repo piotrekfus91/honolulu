@@ -1,0 +1,2 @@
+[home_assistant]
+haos.honolulu.org ansible_user=root

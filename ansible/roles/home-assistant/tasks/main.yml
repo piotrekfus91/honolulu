@@ -1,0 +1,4 @@
+- name: copy configuration.yaml
+  copy:
+    src: configuration.yaml
+    dest: config/configuration.yaml
