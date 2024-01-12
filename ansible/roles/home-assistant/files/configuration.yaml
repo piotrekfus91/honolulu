@@ -14,3 +14,10 @@ homeassistant:
 http:
 
 default_config:
+
+panel_iframe:
+  zigbee2mqtt:
+    title: Zigbee2MQTT
+    icon: mdi:zigbee
+    url: http://haos.honolulu.org:8099
+    require_admin: true
