@@ -1,0 +1,10 @@
+{%- for light_switch in light_switches if light_switch.dimmable %}
+{%- for light_part in light_switch.parts %}
+- id: part_of_day_{{ light_switch.device_id }}{{ light_part.suffix }}
+  alias: Pora dnia {{ light_switch.device_id }}{{ light_part.suffix }}
+  use_blueprint:
+    path: part_of_day_light_switch.yaml
+    input:
+      light_switch: light.{{ light_switch.device_id }}{{ light_part.suffix }}
+{% endfor %}
+{% endfor %}

@@ -1,0 +1,35 @@
+- id: part_of_day_timer_day
+  alias: Day mode on timer
+  trigger:
+    - platform: time
+      at: "07:00:00"
+  action:
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.part_of_day
+      data:
+        option: "Dzień"
+
+- id: part_of_day_timer_evening
+  alias: Evening mode on timer
+  trigger:
+    - platform: time
+      at: "20:00:00"
+  action:
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.part_of_day
+      data:
+        option: "Wieczór"
+
+- id: part_of_day_timer_night
+  alias: Night mode on timer
+  trigger:
+    - platform: time
+      at: "23:00:00"
+  action:
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.part_of_day
+      data:
+        option: "Noc"

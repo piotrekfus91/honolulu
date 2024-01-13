@@ -1,0 +1,40 @@
+blueprint:
+  name: Part of day light switch
+  domain: automation
+  input:
+    light_switch:
+      name: Light switch
+      selector:
+        entity:
+          domain: light
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: !input light_switch
+    from: "off"
+    to: "on"
+  - platform: state
+    entity_id: input_select.part_of_day
+
+condition:
+  - condition: state
+    entity_id: !input light_switch
+    state: "on"
+
+action:
+  - alias: "Turn on the light"
+    service: light.turn_on
+    target:
+      entity_id: !input light_switch
+    data:
+      brightness: >
+          {% if is_state('input_select.part_of_day', 'Wieczór') %}
+            100
+          {% elif is_state('input_select.part_of_day', 'Noc') %}
+            65
+          {% else %}
+            255
+          {% endif %}

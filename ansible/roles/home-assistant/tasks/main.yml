@@ -3,10 +3,13 @@
     src: configuration.yaml
     dest: config/configuration.yaml
 
-- name: create dashboard dir
+- name: create {{ item }} dir
   file:
-    path: config/dashboards
+    path: config/{{ item }}
     state: directory
+  with_items:
+    - dashboards
+    - automations
 
 - name: upload lovelace.yaml
   template:
@@ -18,3 +21,15 @@
     src: "{{ item }}"
     dest: "config/dashboards/{{ item | basename | regex_replace('\\.j2$', '') }}"
   with_fileglob: "{{ role_path }}/templates/dashboards/**.yaml.j2"
+
+- name: upload blueprints
+  copy:
+    src: "{{ item }}"
+    dest: "config/blueprints/automation/{{ item | basename }}"
+  with_fileglob: "{{ role_path }}/files/blueprints/**.yaml"
+
+- name: upload automations
+  template:
+    src: "{{ item }}"
+    dest: "config/automations/{{ item | basename | regex_replace('\\.j2$', '') }}"
+  with_fileglob: "{{ role_path }}/templates/automations/**.yaml.j2"

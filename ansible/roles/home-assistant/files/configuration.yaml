@@ -1,3 +1,6 @@
+default_config:
+automation: !include_dir_merge_list automations/
+
 homeassistant:
   name: Honolulu
   latitude: %LATITUDE%
@@ -13,8 +16,6 @@ homeassistant:
 
 http:
 
-default_config:
-
 panel_iframe:
   zigbee2mqtt:
     title: Zigbee2MQTT
@@ -25,3 +26,13 @@ panel_iframe:
 lovelace:
   mode: yaml
   dashboards: !include dashboards.yaml
+
+input_select:
+  part_of_day:
+    name: Pora dnia
+    options:
+      - Dzień
+      - Wieczór
+      - Noc
+    initial: Dzień
+    icon: mdi:sun-clock
