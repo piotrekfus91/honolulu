@@ -31,3 +31,46 @@ light_switches:
       - id: L1
         suffix:
         name: Jadalnia
+
+  - device_id: "0xa4c138dbe7ae15fd"
+    friendly_name: Kuchnia górne światło
+    area_id: kitchen
+    dimmable: true
+    floor: ground
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Kuchnia górne światło
+
+  - device_id: "0xa4c1389f49a93a5d"
+    friendly_name: Spiżarnia światło
+    area_id: living_room
+    dimmable: true
+    floor: ground
+    parts:
+      - id: L1
+        suffix:
+        name: Spiżarnia światło
+
+  - device_id: "garage_light_switch"
+    friendly_name: Garaż światło
+    area_id: garage
+    dimmable: false
+    floor: ground
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Garaż światło wschodnie
+      - id: L2
+        suffix: _l2
+        name: Garaż światło zachodnie
+
+  - device_id: "next_to_stairs_light_switch"
+    friendly_name: Światło przed schodami
+    area_id: living_room
+    dimmable: true
+    floor: ground
+    parts:
+      - id: L2
+        suffix: _l2
+        name: Światło przed schodami
