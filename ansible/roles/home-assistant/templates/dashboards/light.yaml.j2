@@ -4,7 +4,7 @@ views:
   - title: {{ floor.friendly_name }}
     cards:
     {%- for light in light_switches if light.floor == floor.id %}
-      {%- for light_part in light.parts %}
+      {%- for light_part in light.parts if not light_part.technical | default(false) %}
 
       - type: light
         entity: light.{{light.device_id }}{{ light_part.suffix }}
