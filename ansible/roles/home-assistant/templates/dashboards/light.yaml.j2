@@ -1,7 +1,9 @@
 views:
-  - title: Parter
+
+{% for floor in floors %}
+  - title: {{ floor.friendly_name }}
     cards:
-    {%- for light in light_switches if light.floor == 'downstairs' %}
+    {%- for light in light_switches if light.floor == floor.id %}
       {%- for light_part in light.parts %}
 
       - type: light
@@ -10,13 +12,4 @@ views:
       {% endfor %}
     {% endfor %}
 
-  - title: Piętro
-    cards:
-    {%- for light in light_switches if light.floor == 'upstairs' %}
-      {%- for light_part in light.parts %}
-
-      - type: light
-        entity: light.{{light.device_id }}{{ light_part.suffix }}
-        name: {{ light_part.name }}
-      {% endfor %}
-    {% endfor %}
+{% endfor %}

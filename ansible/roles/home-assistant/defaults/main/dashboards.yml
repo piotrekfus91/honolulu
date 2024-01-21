@@ -1,8 +1,10 @@
 dashboards:
+
   - id: dashboard-light
     title: Oświetlenie
     icon: mdi:lightbulb
     filename: light.yaml
+
   - id: dashboard-management
     title: Zarządzanie
     icon: mdi:home-outline

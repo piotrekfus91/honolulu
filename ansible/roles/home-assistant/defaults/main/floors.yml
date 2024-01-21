@@ -1,0 +1,13 @@
+floors:
+
+  - id: downstairs
+    friendly_name: Parter
+
+  - id: upstairs
+    friendly_name: Piętro
+
+  - id: attic
+    friendly_name: Strych
+
+  - id: outdoors
+    friendly_name: Tereny
