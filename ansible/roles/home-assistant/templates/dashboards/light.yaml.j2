@@ -1,7 +1,18 @@
 views:
   - title: Parter
     cards:
-    {%- for light in light_switches if light.floor == 'ground' %}
+    {%- for light in light_switches if light.floor == 'downstairs' %}
+      {%- for light_part in light.parts %}
+
+      - type: light
+        entity: light.{{light.device_id }}{{ light_part.suffix }}
+        name: {{ light_part.name }}
+      {% endfor %}
+    {% endfor %}
+
+  - title: Piętro
+    cards:
+    {%- for light in light_switches if light.floor == 'upstairs' %}
       {%- for light_part in light.parts %}
 
       - type: light

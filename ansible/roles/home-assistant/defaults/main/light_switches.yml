@@ -3,7 +3,7 @@ light_switches:
     friendly_name: Gabinet światło
     area_id: office
     dimmable: true
-    floor: ground
+    floor: downstairs
     parts:
       - id: L1
         suffix: _l1
@@ -16,7 +16,7 @@ light_switches:
     friendly_name: Salon światło
     area_id: living_room
     dimmable: true
-    floor: ground
+    floor: downstairs
     parts:
       - id: L1
         suffix:
@@ -26,7 +26,7 @@ light_switches:
     friendly_name: Jadalnia światło
     area_id: living_room
     dimmable: true
-    floor: ground
+    floor: downstairs
     parts:
       - id: L1
         suffix:
@@ -36,7 +36,7 @@ light_switches:
     friendly_name: Kuchnia górne światło
     area_id: kitchen
     dimmable: true
-    floor: ground
+    floor: downstairs
     parts:
       - id: L1
         suffix: _l1
@@ -46,7 +46,7 @@ light_switches:
     friendly_name: Spiżarnia światło
     area_id: living_room
     dimmable: true
-    floor: ground
+    floor: downstairs
     parts:
       - id: L1
         suffix:
@@ -56,21 +56,163 @@ light_switches:
     friendly_name: Garaż światło
     area_id: garage
     dimmable: false
-    floor: ground
+    floor: downstairs
     parts:
       - id: L1
         suffix: _l1
-        name: Garaż światło wschodnie
+        name: Garaż światło przy kotłowni
       - id: L2
         suffix: _l2
-        name: Garaż światło zachodnie
+        name: Garaż światło przy wiatrołapie
 
   - device_id: "next_to_stairs_light_switch"
     friendly_name: Światło przed schodami
     area_id: living_room
     dimmable: true
-    floor: ground
+    floor: downstairs
     parts:
       - id: L2
         suffix: _l2
         name: Światło przed schodami
+
+  - device_id: "staircase_light_switch"
+    friendly_name: Światło na schodach
+    area_id: staircase
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Światło na schodach
+
+  - device_id: "laundry_room_light_switch"
+    friendly_name: Światło w pralni
+    area_id: laundry_room
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Światło w pralni
+
+  - device_id: "guest_room_light_switch"
+    friendly_name: Światło w gościnnym
+    area_id: guest_room
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Światło w gościnnym
+
+  - device_id: "master_bedroom_main_light_switch"
+    friendly_name: Główne światło w głównej sypialni
+    area_id: master_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Główne światło w głównej sypialni
+
+  - device_id: "master_bedroom_bed_backlight_light_switch"
+    friendly_name: Podświetlenie łóżka w głównej sypialni
+    area_id: master_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Podświetlenie łóżka w głównej sypialni
+
+  - device_id: "master_bedroom_over_bed_light_switch"
+    friendly_name: Oświetlenie nad łóżkiem w głównej sypialni
+    area_id: master_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Oświetlenie nad łóżkiem w głównej sypialni
+
+  - device_id: "master_bedroom_bed_backlight_light_switch"
+    friendly_name: Podświetlenie łóżka w głównej sypialni
+    area_id: master_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Podświetlenie łóżka w głównej sypialni
+
+  - device_id: "walk_in_wardrobe_light_switch"
+    friendly_name: Światło w garderobie
+    area_id: master_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Podświetlenie LED w garderobie
+      - id: L2
+        suffix: _l2
+        name: Górne światło w garderobie
+
+  - device_id: "walk_in_wardrobe_light_switch"
+    friendly_name: Światło w garderobie
+    area_id: master_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Podświetlenie LED w garderobie
+      - id: L2
+        suffix: _l2
+        name: Górne światło w garderobie
+
+  - device_id: "west_bedroom_light_switch"
+    friendly_name: Światło w zachodniej sypialni
+    area_id: west_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Światło z tyłu w zachodniej sypilani
+      - id: L2
+        suffix: _l2
+        name: Światło przy wejściu w zachodniej sypilani
+
+  - device_id: "south_bedroom_light_switch"
+    friendly_name: Światło w południowej sypialni
+    area_id: south_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Światło w południowej sypilani
+
+  - device_id: "east_bedroom_light_switch"
+    friendly_name: Światło we wschodniej sypialni
+    area_id: east_bedroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Światło z tyłu we wschodniej sypilani
+      - id: L2
+        suffix: _l2
+        name: Światło przy wejściu we wschodniej sypilani
+
+  - device_id: "hallway_light_switch"
+    friendly_name: Światło w korytarzu
+    area_id: hallway
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Światło w korytarzu

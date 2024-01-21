@@ -36,3 +36,7 @@ input_select:
       - Noc
     initial: Dzień
     icon: mdi:sun-clock
+
+prometheus:
+  namespace: haos
+  requires_auth: false
