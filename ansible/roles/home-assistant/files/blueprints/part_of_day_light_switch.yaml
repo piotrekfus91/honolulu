@@ -33,8 +33,10 @@ action:
       brightness: >
           {% if is_state('input_select.part_of_day', 'Wieczór') %}
             100
+          {% elif is_state('input_select.part_of_day', 'Ranek') %}
+            95
           {% elif is_state('input_select.part_of_day', 'Noc') %}
-            65
+            75
           {% else %}
             255
           {% endif %}

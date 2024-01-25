@@ -1,3 +1,16 @@
+- id: part_of_day_timer_morning
+  alias: Morning mode on timer
+  trigger:
+    - platform: time
+      at: "05:30:00"
+  action:
+    - service: input_select.select_option
+      target:
+        entity_id: input_select.part_of_day
+      data:
+        option: "Ranek"
+
+
 - id: part_of_day_timer_day
   alias: Day mode on timer
   trigger:

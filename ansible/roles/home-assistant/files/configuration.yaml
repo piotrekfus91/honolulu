@@ -31,6 +31,7 @@ input_select:
   part_of_day:
     name: Pora dnia
     options:
+      - Ranek
       - Dzień
       - Wieczór
       - Noc
