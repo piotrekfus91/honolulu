@@ -1,2 +1,5 @@
 [home_assistant]
 haos.honolulu.org ansible_user=root
+
+[prometheus]
+monitoring.honolulu.org ansible_user=piotrek
