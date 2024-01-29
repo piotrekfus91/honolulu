@@ -38,7 +38,7 @@ light_switches:
         suffix: _l2
         name: Dolna łazienka oświetlenie lustra
 
-  - device_id: "0xa4c13834a0a68079"
+  - device_id: "living_room_light_switch"
     friendly_name: Salon światło
     area_id: living_room
     dimmable: true
@@ -81,7 +81,7 @@ light_switches:
         suffix:
         name: Podświetlenie TV
 
-  - device_id: "0xa4c1389f49a93a5d"
+  - device_id: "pantry_light_switch"
     friendly_name: Spiżarnia światło
     area_id: living_room
     dimmable: true
@@ -91,7 +91,7 @@ light_switches:
         suffix:
         name: Spiżarnia światło
 
-  - device_id: "0xa4c138dbe7ae15fd"
+  - device_id: "kitchen_main_light_switch"
     friendly_name: Kuchnia górne światło
     area_id: kitchen
     dimmable: true
@@ -382,12 +382,12 @@ light_switch_mappings:
       device_id: kitchen_countertop_light_switch
       part_id: L1
     to:
-      - device_id: "0xa4c138dbe7ae15fd"
+      - device_id: "kitchen_main_light_switch"
         part_id: L2
 
   - name: kitchen_countertop
     from:
-      device_id: "0xa4c138dbe7ae15fd"
+      device_id: "kitchen_main_light_switch"
       part_id: L1
     to:
       - device_id: "kitchen_countertop_light_switch"
