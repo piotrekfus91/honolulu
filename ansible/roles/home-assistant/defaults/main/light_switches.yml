@@ -184,6 +184,45 @@ light_switches:
         suffix:
         name: Światło w pralni
 
+  - device_id: "upstairs_bathroom_main_light_switch"
+    friendly_name: Górna łazienka światło górne
+    area_id: downstairs_bathroom
+    dimmable: false
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Górna łazienka światło górne
+      - id: L2
+        suffix: _l2
+        name: Górna łazienka LED pod prysznicem
+
+  - device_id: "upstairs_bathroom_left_mirror_light_switch"
+    friendly_name: Górna łazienka światło przy lewym lustrze
+    area_id: downstairs_bathroom
+    dimmable: false
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Górna łazienka światło przy lewym lustrze górne
+      - id: L2
+        suffix: _l2
+        name: Górna łazienka światło przy lewym lustrze LED
+
+  - device_id: "upstairs_bathroom_right_mirror_light_switch"
+    friendly_name: Górna łazienka światło przy prawym lustrze
+    area_id: downstairs_bathroom
+    dimmable: false
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Górna łazienka światło przy prawym lustrze LED
+      - id: L2
+        suffix: _l2
+        name: Górna łazienka światło przy prawym lustrze górne
+
   - device_id: "guest_room_light_switch"
     friendly_name: Światło w gościnnym
     area_id: guest_room
@@ -193,6 +232,16 @@ light_switches:
       - id: L1
         suffix:
         name: Światło w gościnnym
+
+  - device_id: "junk_room_light_switch"
+    friendly_name: Światło w schowku
+    area_id: guest_room
+    dimmable: false
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Światło w schowku
 
   - device_id: "master_bedroom_main_light_switch"
     friendly_name: Główne światło w głównej sypialni
@@ -213,16 +262,6 @@ light_switches:
       - id: L1
         suffix:
         name: Oświetlenie nad łóżkiem w głównej sypialni
-
-  - device_id: "master_bedroom_bed_backlight_light_switch"
-    friendly_name: Podświetlenie łóżka w głównej sypialni
-    area_id: master_bedroom
-    dimmable: true
-    floor: upstairs
-    parts:
-      - id: L1
-        suffix:
-        name: Podświetlenie łóżka w głównej sypialni
 
   - device_id: "master_bedroom_bed_backlight_light_switch"
     friendly_name: Podświetlenie łóżka w głównej sypialni
