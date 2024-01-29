@@ -1,0 +1,4 @@
+datasources:
+  - name: Honolulu
+    type: prometheus
+    url: http://{{ groups['prometheus'] | map('extract', hostvars, 'inventory_hostname') | first }}:{{ ports.prometheus }}

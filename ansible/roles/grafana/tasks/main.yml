@@ -1,0 +1,52 @@
+- name: add grafana repo key
+  apt_key:
+    url: https://apt.grafana.com/gpg.key
+
+- name: add grafana repo
+  apt_repository:
+    repo: "deb https://apt.grafana.com stable main"
+    update_cache: yes
+
+- name: install grafana
+  apt:
+    name: grafana
+    state: present
+  notify:
+    - restart grafana
+
+- name: enable grafana
+  systemd:
+    name: grafana-server
+    enabled: true
+  notify:
+    - restart grafana
+
+- name: copy datasources config
+  template:
+    src: "datasources.yml.j2"
+    dest: "/etc/grafana/provisioning/datasources/datasources.yml"
+  notify:
+    - restart grafana
+
+- name: copy dashboards config
+  template:
+    src: "dashboards.yml.j2"
+    dest: "/etc/grafana/provisioning/dashboards/dashboards.yml"
+  notify:
+    - restart grafana
+
+- name: provision dashboards
+  synchronize:
+    src: dashboards/
+    dest: "/etc/grafana/dashboards"
+    checksum: yes
+    times: no
+    delete: yes
+    rsync_opts:
+      - --include="\*.json"
+      - --usermap="\*:grafana"
+      - --groupmap="\*:grafana"
+      - --chmod=Dug=rwx,Do=rx,Fug=rw,Fo=r
+    use_ssh_args: yes
+  tags:
+    - dashboards

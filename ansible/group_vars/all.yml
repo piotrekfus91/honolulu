@@ -1,0 +1,2 @@
+ports:
+  prometheus: 9090

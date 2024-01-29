@@ -3,3 +3,6 @@ haos.honolulu.org ansible_user=root
 
 [prometheus]
 monitoring.honolulu.org ansible_user=piotrek
+
+[grafana]
+monitoring.honolulu.org ansible_user=piotrek
