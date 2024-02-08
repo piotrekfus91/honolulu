@@ -353,7 +353,7 @@ light_switches:
         name: Światło przed drzwiami bocznymi
 
 light_switch_mappings:
-  - name: dining_room
+  - name: next_to_stairs
     from:
       device_id: next_to_stairs_light_switch
       part_id: L1
@@ -361,7 +361,7 @@ light_switch_mappings:
       - device_id: dining_room_light_switch
         part_id: L1
 
-  - name: downstairs_bathroom_mirror
+  - name: downstairs_bathroom_main
     from:
       device_id: downstairs_bathroom_main_light_switch
       part_id: L1
@@ -369,7 +369,7 @@ light_switch_mappings:
       - device_id: downstairs_bathroom_mirror_light_switch
         part_id: L2
 
-  - name: downstairs_bathroom_main
+  - name: downstairs_bathroom_mirror
     from:
       device_id: downstairs_bathroom_mirror_light_switch
       part_id: L1
@@ -377,7 +377,7 @@ light_switch_mappings:
       - device_id: downstairs_bathroom_main_light_switch
         part_id: L2
 
-  - name: kitchen_ceiling
+  - name: kitchen_countertop
     from:
       device_id: kitchen_countertop_light_switch
       part_id: L1
@@ -385,7 +385,7 @@ light_switch_mappings:
       - device_id: "kitchen_main_light_switch"
         part_id: L2
 
-  - name: kitchen_countertop
+  - name: kitchen_main
     from:
       device_id: "kitchen_main_light_switch"
       part_id: L1
@@ -401,7 +401,7 @@ light_switch_mappings:
       - device_id: "mudroom_light_switch"
         part_id: L2
 
-  - name: garage
+  - name: boiler_room
     from:
       device_id: "boiler_room_light_switch"
       part_id: L1

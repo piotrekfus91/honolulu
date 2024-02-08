@@ -11,3 +11,16 @@
 {% endfor %}
 
 {% endfor %}
+
+# this transmitter does not support switch type per button
+- id: boiler_room_l1_auto_switch_off
+  alias: Automatyczne wyłączenie L1 w kotłowni
+  trigger:
+    - platform: state
+      entity_id: light.boiler_room_light_switch_l1
+      from: "off"
+      to: "on"
+  action:
+    service: light.turn_off
+    target:
+      entity_id: light.boiler_room_light_switch_l1

@@ -19,6 +19,8 @@ max_exceeded: silent
 trigger:
   - platform: state
     entity_id: !input light_switch_input
+    from: "off"
+    to: "on"
 
 action:
   - alias: "Toggle the light"
