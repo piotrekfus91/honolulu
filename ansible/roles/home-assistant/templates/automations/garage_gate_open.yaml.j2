@@ -1,0 +1,13 @@
+- id: garage_gate_open_garage_light
+  alias: Brama garażowa - włączenie światła
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.garage_gate_magnetic_sensor
+      to: "on"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id:
+          - light.garage_light_switch_l1
+          - light.garage_light_switch_l2
