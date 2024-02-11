@@ -1,0 +1,18 @@
+host: satel.honolulu.org
+port: 7094
+partitions:
+
+{%- for partition in satel.partitions %}
+
+  {{ partition.id }}:
+    name: {{ partition.name }}
+    arm_home_mode: {{ partition.arm_home_mode }}
+{% endfor %}
+
+zones:
+
+{%- for zone in satel.zones %}
+
+  {{ zone.id }}:
+    name: {{ zone.name }}
+{% endfor %}

@@ -1,0 +1,12 @@
+- id: mudroom_wardrobe_light
+  alias: Wiatrołap - włączanie oświetlenia szafek
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.mudroom_motion_sensor
+      to: "on"
+  condition: []
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.mudroom_light_switch_l2

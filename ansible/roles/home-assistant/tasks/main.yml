@@ -11,10 +11,14 @@
     - dashboards
     - automations
 
-- name: upload lovelace.yaml
+- include_tasks: satel.yml
+
+- name: upload templates
   template:
-    src: dashboards.yaml.j2
-    dest: config/dashboards.yaml
+    src: "{{ item }}.j2"
+    dest: "config/{{ item }}"
+  loop:
+    - dashboards.yaml
 
 - name: copy dashboards
   template:

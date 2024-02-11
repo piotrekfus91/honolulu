@@ -41,3 +41,5 @@ input_select:
 prometheus:
   namespace: haos
   requires_auth: false
+
+satel_integra: !include satel.yaml
