@@ -5,6 +5,11 @@ dashboards:
     icon: mdi:lightbulb
     filename: light.yaml
 
+  - id: dashboard-blind
+    title: Rolety
+    icon: mdi:blinds
+    filename: blinds.yaml
+
   - id: dashboard-management
     title: Zarządzanie
     icon: mdi:home-outline

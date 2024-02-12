@@ -1,0 +1,18 @@
+views:
+{%- for floor in floors if floor.has_blinds %}
+
+  - title: {{ floor.friendly_name }}
+    cards:
+{%- for area in areas if area.floor == floor.id and area.has_blind %}
+
+      - type: entities
+        title: {{ area.friendly_name }}
+        entities:
+        {%- for blind in blinds if blind.area == area.id %}
+
+          - entity: cover.{{ blind.id }}
+            name: {{ blind.friendly_name }}
+            icon: mdi:blinds
+        {% endfor %}
+{% endfor %}
+{% endfor %}
