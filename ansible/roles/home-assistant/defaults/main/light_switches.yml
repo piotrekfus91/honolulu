@@ -132,6 +132,7 @@ light_switches:
 
   - device_id: "mudroom_auxiliary_light_switch"
     dimmable: false
+    area_id: mudroom
     floor: downstairs
     parts:
       - id: L1
@@ -186,7 +187,7 @@ light_switches:
 
   - device_id: "upstairs_bathroom_main_light_switch"
     friendly_name: Górna łazienka światło górne
-    area_id: downstairs_bathroom
+    area_id: upstairs_bathroom
     dimmable: false
     floor: upstairs
     parts:
@@ -199,7 +200,7 @@ light_switches:
 
   - device_id: "upstairs_bathroom_left_mirror_light_switch"
     friendly_name: Górna łazienka światło przy lewym lustrze
-    area_id: downstairs_bathroom
+    area_id: upstairs_bathroom
     dimmable: false
     floor: upstairs
     parts:
@@ -212,7 +213,7 @@ light_switches:
 
   - device_id: "upstairs_bathroom_right_mirror_light_switch"
     friendly_name: Górna łazienka światło przy prawym lustrze
-    area_id: downstairs_bathroom
+    area_id: upstairs_bathroom
     dimmable: false
     floor: upstairs
     parts:
@@ -235,7 +236,7 @@ light_switches:
 
   - device_id: "junk_room_light_switch"
     friendly_name: Światło w schowku
-    area_id: guest_room
+    area_id: junk_room
     dimmable: false
     floor: upstairs
     parts:

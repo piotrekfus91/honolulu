@@ -1,15 +1,19 @@
 views:
+{%- for floor in floors if floor.has_lights %}
 
-{% for floor in floors %}
   - title: {{ floor.friendly_name }}
     cards:
-    {%- for light in light_switches if light.floor == floor.id %}
-      {%- for light_part in light.parts if not light_part.technical | default(false) %}
+{%- for area in areas if area.floor == floor.id %}
 
-      - type: light
-        entity: light.{{light.device_id }}{{ light_part.suffix }}
-        name: {{ light_part.name }}
-      {% endfor %}
-    {% endfor %}
+      - type: entities
+        title: {{ area.friendly_name }}
+        entities:
+        {%- for light in light_switches if light.area_id == area.id %}
+          {%- for light_part in light.parts if not light_part.technical | default(false) %}
 
+          - entity: light.{{light.device_id }}{{ light_part.suffix }}
+            name: {{ light_part.name }}
+          {% endfor %}
+        {% endfor %}
+{% endfor %}
 {% endfor %}
