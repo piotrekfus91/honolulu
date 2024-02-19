@@ -3,7 +3,7 @@ views:
 
   - title: {{ floor.friendly_name }}
     cards:
-{%- for area in areas if area.floor == floor.id and area.has_blind %}
+{%- for area in areas if area.floor == floor.id and area.has_blinds %}
 
       - type: entities
         title: {{ area.friendly_name }}

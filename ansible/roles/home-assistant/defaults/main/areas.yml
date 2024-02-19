@@ -3,82 +3,82 @@ areas:
   - id: living_room
     friendly_name: Salon
     floor: downstairs
-    has_blind: true
+    has_blinds: true
   - id: kitchen
     friendly_name: Kuchnia
     floor: downstairs
-    has_blind: true
+    has_blinds: true
   - id: office
     friendly_name: Gabinet
     floor: downstairs
-    has_blind: true
+    has_blinds: true
   - id: downstairs_bathroom
     friendly_name: Dolna łazienka
     floor: downstairs
-    has_blind: false
+    has_blinds: false
   - id: mudroom
     friendly_name: Wiatrołap
     floor: downstairs
-    has_blind: false
+    has_blinds: false
   - id: garage
     friendly_name: Garaż
     floor: downstairs
-    has_blind: true
+    has_blinds: true
   - id: boiler_room
     friendly_name: Kotłownia
     floor: downstairs
-    has_blind: false
+    has_blinds: false
 
   # upstairs
   - id: master_bedroom
     friendly_name: Główna sypialnia
     floor: upstairs
-    has_blind: true
+    has_blinds: true
   - id: upstairs_bathroom
     friendly_name: Górna łazienka
     floor: upstairs
-    has_blind: true
+    has_blinds: true
   - id: laundry_room
     friendly_name: Pralnia
     floor: upstairs
-    has_blind: true
+    has_blinds: true
   - id: guest_room
     friendly_name: Gościnny
     floor: upstairs
-    has_blind: true
+    has_blinds: true
   - id: west_bedroom
     friendly_name: Zachodnia sypialnia
     floor: upstairs
-    has_blind: true
+    has_blinds: true
   - id: south_bedroom
     friendly_name: Południowa sypialnia
     floor: upstairs
-    has_blind: true
+    has_blinds: true
   - id: east_bedroom
     friendly_name: Wschodnia sypialnia
     floor: upstairs
-    has_blind: true
+    has_blinds: true
   - id: junk_room
     friendly_name: Schowek
     floor: upstairs
-    has_blind: false
+    has_blinds: false
   - id: hallway
     friendly_name: Korytarz
     floor: upstairs
-    has_blind: false
+    has_blinds: false
   - id: staircase
     friendly_name: Schody
     floor: upstairs
-    has_blind: false
+    has_blinds: false
 
   # attic
   - id: attic
     friendly_name: Strych
     floor: attic
-    has_blind: false
+    has_blinds: false
 
   # outdoors
   - id: outdoors
     friendly_name: Tereny
     floor: outdoors
-    has_blind: false
+    has_blinds: false
