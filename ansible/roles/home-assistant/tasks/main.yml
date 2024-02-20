@@ -10,6 +10,8 @@
   with_items:
     - dashboards
     - automations
+    - scripts
+    - inputs
 
 - include_tasks: satel.yml
 
@@ -37,3 +39,15 @@
     src: "{{ item }}"
     dest: "config/automations/{{ item | basename | regex_replace('\\.j2$', '') }}"
   with_fileglob: "{{ role_path }}/templates/automations/**.yaml.j2"
+
+- name: upload scripts
+  template:
+    src: "{{ item }}"
+    dest: "config/scripts/{{ item | basename | regex_replace('\\.j2$', '') }}"
+  with_fileglob: "{{ role_path }}/templates/scripts/**.yaml.j2"
+
+- name: upload inputs
+  copy:
+    src: "{{ item }}"
+    dest: "config/inputs/{{ item | basename }}"
+  with_fileglob: "{{ role_path }}/files/inputs/**.yaml"

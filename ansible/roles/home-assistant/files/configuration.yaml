@@ -27,19 +27,17 @@ lovelace:
   mode: yaml
   dashboards: !include dashboards.yaml
 
-input_select:
-  part_of_day:
-    name: Pora dnia
-    options:
-      - Ranek
-      - Dzień
-      - Wieczór
-      - Noc
-    initial: Dzień
-    icon: mdi:sun-clock
+input_select: !include inputs/select.yaml
+
+
+logger:
+  default: info
+#  logs:
 
 prometheus:
   namespace: haos
   requires_auth: false
 
 satel_integra: !include satel.yaml
+
+script: !include_dir_merge_named scripts/

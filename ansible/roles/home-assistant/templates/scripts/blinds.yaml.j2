@@ -1,0 +1,91 @@
+{%- for floor in floors if floor.has_blinds %}
+{%- for state in [{'action': 'open', 'state': 'opening', 'friendly_name': 'Otwieranie', 'desired_states': ['open', 'opening'], 'break_script_prefix': 'close'}, {'action': 'close', 'state': 'closing', 'friendly_name': 'Zamykanie', 'desired_states': ['closed', 'closing'], 'break_script_prefix': 'open'}] %}
+
+{{ state.action }}_{{ floor.id }}_blinds:
+  mode: restart
+  alias: {{ state.friendly_name }} rolet {{ floor.friendly_name | lower }}
+  sequence:
+    - alias: set state
+      service: input_select.select_option
+      target:
+        entity_id: input_select.blinds_{{ floor.id }}_script_state
+      data:
+        option: "{{ state.state }}"
+    - repeat:
+        sequence:
+          - alias: {{ state.friendly_name }} rolet
+            service: cover.{{ state.action }}_cover
+            target:
+              entity_id:
+{% for blind in blinds if blind.floor == floor.id %}
+                - cover.{{ blind.id }}
+{% endfor %}
+          - delay:
+              seconds: 60
+        until:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id:
+{% for blind in blinds if blind.floor == floor.id %}
+                  - cover.{{ blind.id }}
+{% endfor %}
+                state:
+{% for desired_state in state.desired_states %}
+                  - {{ desired_state }}
+{% endfor %}
+              - "{% raw %}{{{% endraw %} not is_state('input_select.blinds_{{ floor.id }}_script_state', '{{ state.state }}') }}"
+              - "{% raw %}{{{% endraw %} repeat.index >= 10 }}"
+
+    - if:
+        condition: state
+        entity_id:
+{% for blind in blinds if blind.floor == floor.id %}
+          - cover.{{ blind.id }}
+{% endfor %}
+        state:
+{% for desired_state in state.desired_states %}
+                  - {{ desired_state }}
+{% endfor %}
+      then:
+        service: notify.notify
+        data:
+          message: "{{ state.friendly_name }} rolet {{ floor.friendly_name | lower }} udane"
+      else:
+        service: notify.notify
+        data:
+          message: "{{ state.friendly_name }} rolet {{ floor.friendly_name | lower }} nieudane"
+
+    - condition: state
+      entity_id: input_select.blinds_{{ floor.id }}_script_state
+      state:
+{% for desired_state in state.desired_states %}
+        - {{ desired_state }}
+{% endfor %}
+
+    - alias: unset state
+      service: input_select.select_option
+      target:
+        entity_id: input_select.blinds_{{ floor.id }}_script_state
+      data:
+        option: "none"
+{% endfor %}
+
+stop_{{ floor.id }}_blinds:
+  mode: restart
+  alias: Zatrzymanie rolet {{ floor.friendly_name | lower }}
+  sequence:
+    - alias: unset state
+      service: input_select.select_option
+      target:
+        entity_id: input_select.blinds_{{ floor.id }}_script_state
+      data:
+        option: "none"
+    - alias: Zatrzymanie rolet
+      service: cover.stop_cover
+      target:
+        entity_id:
+{% for blind in blinds if blind.floor == floor.id %}
+          - cover.{{ blind.id }}
+{% endfor %}
+{% endfor %}
