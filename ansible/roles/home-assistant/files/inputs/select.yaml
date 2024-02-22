@@ -8,7 +8,7 @@ part_of_day:
   initial: Dzień
   icon: mdi:sun-clock
 blinds_downstairs_script_state:
-  name: Stan skryptu rolet na dole
+  name: Stan skryptu rolet na parterze
   options:
     - none
     - closing
@@ -16,7 +16,7 @@ blinds_downstairs_script_state:
   initial: none
   icon: mdi:blinds
 blinds_upstairs_script_state:
-  name: Stan skryptu rolet na dole
+  name: Stan skryptu rolet na piętrze
   options:
     - none
     - closing
