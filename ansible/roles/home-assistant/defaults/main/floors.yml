@@ -4,18 +4,22 @@ floors:
     friendly_name: Parter
     has_lights: true
     has_blinds: true
+    has_alarm: true
 
   - id: upstairs
     friendly_name: Piętro
     has_lights: true
     has_blinds: true
+    has_alarm: true
 
   - id: attic
     friendly_name: Strych
     has_lights: true
     has_blinds: false
+    has_alarm: false
 
   - id: outdoors
     friendly_name: Tereny
     has_lights: true
     has_blinds: false
+    has_alarm: false
