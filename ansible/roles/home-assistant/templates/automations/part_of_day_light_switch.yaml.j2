@@ -8,3 +8,10 @@
       light_switch: light.{{ light_switch.device_id }}{{ light_part.suffix }}
 {% endfor %}
 {% endfor %}
+
+- id: part_of_day_stairs
+  alias: Pora dnia podświetlenie schodów
+  use_blueprint:
+    path: part_of_day_light_switch.yaml
+    input:
+      light_switch: light.stairs_backlight
