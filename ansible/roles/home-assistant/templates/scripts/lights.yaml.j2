@@ -1,0 +1,33 @@
+{%- for floor in floors %}
+turn_off_{{ floor.id }}_lights:
+  mode: restart
+  alias: Wyłączenie świateł {{ floor.friendly_name }}
+  sequence:
+    - repeat:
+        sequence:
+{% for light_switch in light_switches if light_switch.floor == floor.id %}
+{%- for light_switch_part in light_switch.parts %}
+          - alias: Wyłączanie {{ light_switch_part.name }}
+            service: light.turn_off
+            target:
+              entity_id: light.{{ light_switch.device_id }}{{ light_switch_part.suffix }}
+          - delay:
+              seconds: 1
+{% endfor %}
+{% endfor %}
+          - delay:
+              seconds: 3
+        until:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id:
+{% for light_switch in light_switches if light_switch.floor == floor.id %}
+{%- for light_switch_part in light_switch.parts %}
+                  - light.{{ light_switch.device_id }}{{ light_switch_part.suffix }}
+{% endfor %}
+{% endfor %}
+                state: "off"
+              - "{% raw %}{{{% endraw %} repeat.index >= 50 }}"
+
+{% endfor %}

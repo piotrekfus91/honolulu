@@ -21,6 +21,7 @@ light_switches:
       - id: L1
         suffix: _l1
         technical: true
+        name: Przycisk pomocniczy
       - id: L2
         suffix: _l2
         name: Dolna łazienka górne światło
@@ -34,6 +35,7 @@ light_switches:
       - id: L1
         suffix: _l1
         technical: true
+        name: Przycisk pomocniczy
       - id: L2
         suffix: _l2
         name: Dolna łazienka oświetlenie lustra
@@ -67,6 +69,7 @@ light_switches:
       - id: L1
         suffix: _l1
         technical: true
+        name: Przycisk pomocniczy
       - id: L2
         suffix: _l2
         name: Światło przed schodami
@@ -100,6 +103,7 @@ light_switches:
       - id: L1
         suffix: _l1
         technical: true
+        name: Przycisk pomocniczy
       - id: L2
         suffix: _l2
         name: Kuchnia górne światło
@@ -113,6 +117,7 @@ light_switches:
       - id: L1
         suffix: _l1
         technical: true
+        name: Przycisk pomocniczy
       - id: L2
         suffix: _l2
         name: Kuchnia oświetlenie barku
@@ -131,6 +136,7 @@ light_switches:
         name: Wiatrołap oświetlenie szafek
 
   - device_id: "mudroom_auxiliary_light_switch"
+    friendly_name: Wiatrołap - przycisk pomocniczy
     dimmable: false
     area_id: mudroom
     floor: downstairs
@@ -138,6 +144,7 @@ light_switches:
       - id: L1
         suffix:
         technical: true
+        name: Przycisk pomocniczy
 
   - device_id: "garage_light_switch"
     friendly_name: Garaż światło
@@ -161,6 +168,7 @@ light_switches:
       - id: L1
         suffix: _l1
         technical: true
+        name: Przycisk pomocniczy
       - id: L2
         suffix: _l2
         name: Kotłownia światło

@@ -1,5 +1,5 @@
 {%- for floor in floors if floor.has_alarm %}
-{%- for alarm in [{'state': 'armed_away', 'friendly_name': 'uzbrojony', 'blinds': 'close'}, {'state': 'disarmed', 'friendly_name': 'rozbrojony', 'blinds': 'open'}] %}
+{%- for alarm in [{'state': 'armed_away', 'friendly_name': 'uzbrojony', 'blinds': 'close', 'light_scripts': ['turn_off_downstairs_lights', 'turn_off_outdoors_lights']}, {'state': 'disarmed', 'friendly_name': 'rozbrojony', 'blinds': 'open', 'light_scripts': ['turn_off_upstairs_lights', 'turn_off_attic_lights']}] %}
 - id: "{{ floor.id }}_alarm_{{ alarm.state }}"
   alias: "Alarm {{ alarm.friendly_name }} {{ floor.friendly_name | lower }}"
   trigger:
@@ -8,7 +8,13 @@
         - alarm_control_panel.{{ floor.id }}_alarm
       to: "{{ alarm.state }}"
   action:
-    - service: script.turn_on
-      entity_id: script.{{ alarm.blinds }}_{{ floor.id }}_blinds
+    - parallel:
+      - service: script.turn_on
+        entity_id: script.{{ alarm.blinds }}_{{ floor.id }}_blinds
+{%- for light_script in alarm.light_scripts %}
+
+      - service: script.turn_on
+        entity_id: script.{{ light_script }}
+{% endfor  %}
 {% endfor %}
 {% endfor %}
