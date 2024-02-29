@@ -22,6 +22,10 @@ panel_iframe:
     icon: mdi:zigbee
     url: http://haos.honolulu.org:8099
     require_admin: true
+  grafana:
+    title: Grafana
+    icon: mdi:chart-timeline
+    url: http://monitoring.honolulu.org:3000
 
 lovelace:
   mode: yaml

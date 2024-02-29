@@ -21,6 +21,13 @@
   notify:
     - restart grafana
 
+- name: copy grafana.ini
+  copy:
+    src: grafana.ini
+    dest: /etc/grafana/grafana.ini
+  notify:
+    - restart grafana
+
 - name: copy datasources config
   template:
     src: "datasources.yml.j2"
