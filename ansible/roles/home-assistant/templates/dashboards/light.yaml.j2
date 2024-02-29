@@ -3,6 +3,10 @@ views:
 
   - title: {{ floor.friendly_name }}
     cards:
+      - type: entities
+        entities:
+          - entity: script.turn_off_{{ floor.id }}_lights
+
 {%- for area in areas if area.floor == floor.id %}
 
       - type: entities

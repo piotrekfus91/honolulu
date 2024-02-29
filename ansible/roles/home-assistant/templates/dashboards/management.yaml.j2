@@ -7,9 +7,16 @@ views:
       - type: entities
         title: Rolety
         entities:
-          - entity: script.close_downstairs_blinds
-          - entity: script.open_downstairs_blinds
-          - entity: script.stop_downstairs_blinds
-          - entity: script.close_upstairs_blinds
-          - entity: script.open_upstairs_blinds
-          - entity: script.stop_upstairs_blinds
+{%- for floor in floors if floor.has_blinds %}
+
+          - entity: script.close_{{ floor.id }}_blinds
+          - entity: script.open_{{ floor.id }}_blinds
+          - entity: script.stop_{{ floor.id }}_blinds
+{% endfor %}
+      - type: entities
+        title: Oświetlenie
+        entities:
+{%- for floor in floors if floor.has_lights %}
+
+          - entity: script.turn_off_{{ floor.id }}_lights
+{% endfor %}
