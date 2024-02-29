@@ -196,7 +196,7 @@ light_switches:
   - device_id: "upstairs_bathroom_main_light_switch"
     friendly_name: Górna łazienka światło górne
     area_id: upstairs_bathroom
-    dimmable: false
+    dimmable: true
     floor: upstairs
     parts:
       - id: L1
@@ -205,6 +205,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Górna łazienka LED pod prysznicem
+        dimmable: false
 
   - device_id: "upstairs_bathroom_left_mirror_light_switch"
     friendly_name: Górna łazienka światło przy lewym lustrze
