@@ -39,7 +39,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 50,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -47,9 +47,9 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 0,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -57,7 +57,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -87,16 +87,18 @@
         "x": 0,
         "y": 0
       },
-      "id": 1,
+      "id": 4,
+      "interval": "$custom_interval",
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "delta"
           ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
-          "sortBy": "Last *",
+          "sortBy": "Delta",
           "sortDesc": true
         },
         "tooltip": {
@@ -111,7 +113,7 @@
             "uid": "P3ED5A49636A1C7DB"
           },
           "editorMode": "code",
-          "expr": "increase(haos_state_change_total{entity=~\".*motion_sensor\"}[$__range])",
+          "expr": "increase(haos_state_change_total{entity=~\".*motion_sensor\"}[$custom_interval])",
           "instant": false,
           "legendFormat": "{{friendly_name}}",
           "range": true,
@@ -139,7 +141,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 50,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -147,9 +149,9 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 0,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -157,7 +159,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -187,16 +189,18 @@
         "x": 0,
         "y": 8
       },
-      "id": 2,
+      "id": 5,
+      "interval": "$custom_interval",
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "delta"
           ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
-          "sortBy": "Last *",
+          "sortBy": "Delta",
           "sortDesc": true
         },
         "tooltip": {
@@ -211,7 +215,7 @@
             "uid": "P3ED5A49636A1C7DB"
           },
           "editorMode": "code",
-          "expr": "increase(haos_state_change_total{entity=~\".*(door|gate)_magnetic_sensor\"}[$__range]) / 2",
+          "expr": "increase(haos_state_change_total{entity=~\".*(door|garage_gate)_magnetic_sensor\"}[$custom_interval])",
           "instant": false,
           "legendFormat": "{{friendly_name}}",
           "range": true,
@@ -239,7 +243,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 50,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -247,9 +251,9 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 0,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -257,7 +261,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -287,16 +291,18 @@
         "x": 0,
         "y": 16
       },
-      "id": 3,
+      "id": 6,
+      "interval": "$custom_interval",
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "delta"
           ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
-          "sortBy": "Last *",
+          "sortBy": "Delta",
           "sortDesc": true
         },
         "tooltip": {
@@ -311,7 +317,7 @@
             "uid": "P3ED5A49636A1C7DB"
           },
           "editorMode": "code",
-          "expr": "increase(haos_state_change_total{entity=~\".*window_magnetic_sensor\"}[$__range]) / 2",
+          "expr": "increase(haos_state_change_total{entity=~\".*window_magnetic_sensor\"}[$custom_interval])",
           "instant": false,
           "legendFormat": "{{friendly_name}}",
           "range": true,
@@ -326,7 +332,80 @@
   "schemaVersion": 39,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "1h",
+          "value": "1h"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "custom_interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "2m",
+            "value": "2m"
+          },
+          {
+            "selected": false,
+            "text": "3m",
+            "value": "3m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "15m",
+            "value": "15m"
+          },
+          {
+            "selected": true,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "2h",
+            "value": "2h"
+          },
+          {
+            "selected": false,
+            "text": "3h",
+            "value": "3h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "24h",
+            "value": "24h"
+          }
+        ],
+        "query": "1m, 2m, 3m, 5m, 15m, 1h, 2h, 3h, 6h, 12h, 24h",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-24h",
@@ -335,6 +414,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Satel",
-  "version": 0,
+  "uid": "fcd9f40b-2899-4125-9c91-20ff2c40b8ca",
+  "version": 2,
   "weekStart": ""
 }
