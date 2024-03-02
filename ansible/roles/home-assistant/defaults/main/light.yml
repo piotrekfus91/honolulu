@@ -362,6 +362,27 @@ light_switches:
         suffix:
         name: Światło przed drzwiami bocznymi
 
+temporary_lights:
+  - id: garage_temporary_light
+    friendly_name: Tymczasowe światło - garaż
+    input: binary_sensor.garage_gate_magnetic_sensor
+    entities:
+      - light.garage_light_switch_l1
+      - light.garage_light_switch_l2
+    timeout_seconds: 300
+  - id: mudroom_temporary_light
+    friendly_name: Tymczasowe światło - wiatrołap
+    input: binary_sensor.mudroom_motion_sensor
+    entities:
+      - light.mudroom_light_switch_l2
+    timeout_seconds: 180
+  - id: upstairs_bathroom_washbasin_cabinet_temporary_light
+    friendly_name: Tymczasowe światło - podświetlenie pod umywalkami w górnej łazience
+    input: binary_sensor.upstairs_bathroom_motion_sensor
+    entities:
+      - light.upstairs_bathroom_washbasin_cabinet_backlight
+    timeout_seconds: 180
+
 light_switch_mappings:
   - name: next_to_stairs
     from:

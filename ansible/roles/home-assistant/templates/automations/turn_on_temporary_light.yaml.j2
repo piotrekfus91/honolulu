@@ -1,0 +1,14 @@
+{%- for temporary_light in temporary_lights %}
+- id: {{ temporary_light.id }}
+  alias: {{ temporary_light.friendly_name }}
+  use_blueprint:
+    path: turn_on_temporary_light.yaml
+    input:
+      input_entity: {{ temporary_light.input }}
+      light_to_turn_on:
+{%- for entity in temporary_light.entities %}
+
+        - {{ entity }}
+{% endfor %}
+      timeout_seconds: {{ temporary_light.timeout_seconds }}
+{% endfor %}
