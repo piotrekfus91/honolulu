@@ -27,27 +27,32 @@
     src: "{{ item }}"
     dest: "config/dashboards/{{ item | basename | regex_replace('\\.j2$', '') }}"
   with_fileglob: "{{ role_path }}/templates/dashboards/**.yaml.j2"
+  tags: dashboards
 
 - name: upload blueprints
   copy:
     src: "{{ item }}"
     dest: "config/blueprints/automation/{{ item | basename }}"
   with_fileglob: "{{ role_path }}/files/blueprints/**.yaml"
+  tags: automations
 
 - name: upload automations
   template:
     src: "{{ item }}"
     dest: "config/automations/{{ item | basename | regex_replace('\\.j2$', '') }}"
   with_fileglob: "{{ role_path }}/templates/automations/**.yaml.j2"
+  tags: automations
 
 - name: upload scripts
   template:
     src: "{{ item }}"
     dest: "config/scripts/{{ item | basename | regex_replace('\\.j2$', '') }}"
   with_fileglob: "{{ role_path }}/templates/scripts/**.yaml.j2"
+  tags: scripts
 
 - name: upload inputs
   copy:
     src: "{{ item }}"
     dest: "config/inputs/{{ item | basename }}"
   with_fileglob: "{{ role_path }}/files/inputs/**.yaml"
+  tags: inputs
