@@ -1,0 +1,28 @@
+- id: circulator_timer
+  mode: single
+  max_exceeded: silent
+  alias: Harmonogram cyrkulatora
+  trigger:
+    - platform: time_pattern
+      minutes: 0
+    - platform: state
+      entity_id: alarm_control_panel.upstairs_alarm
+      to: disarmed
+  condition:
+    - condition: time
+      after: '4:59:00'
+      before: '23:01:00'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.upstairs_alarm
+          state: "armed_away"
+  action:
+    - service: switch.turn_on
+      target:
+        entity_id: switch.circulator_socket
+    - delay:
+        minutes: 10
+    - service: switch.turn_off
+      target:
+        entity_id: switch.circulator_socket
