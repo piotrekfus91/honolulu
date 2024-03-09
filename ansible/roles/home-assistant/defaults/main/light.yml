@@ -342,6 +342,16 @@ light_switches:
         suffix:
         name: Światło w korytarzu
 
+  - device_id: "attic_light_switch"
+    friendly_name: Światło na strychu
+    area_id: attic
+    dimmable: false
+    floor: attic
+    parts:
+      - id: L1
+        suffix:
+        name: Światło na strychu
+
   - device_id: "front_door_light_switch"
     friendly_name: Światło przed drzwiami wejściowymi
     area_id: outdoors
