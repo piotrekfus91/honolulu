@@ -233,6 +233,16 @@ light_switches:
         suffix: _l2
         name: Górna łazienka światło przy prawym lustrze górne
 
+  - device_id: "upstairs_bathroom_washbasin_cabinet_backlight"
+    friendly_name: Górna łazienka podświetlenie szafki z umywalkami
+    area_id: upstairs_bathroom
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Górna łazienka podświetlenie szafki z umywalkami
+
   - device_id: "guest_room_light_switch"
     friendly_name: Światło w gościnnym
     area_id: guest_room
