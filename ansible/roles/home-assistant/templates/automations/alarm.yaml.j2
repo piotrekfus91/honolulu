@@ -1,5 +1,18 @@
 {%- for floor in floors if floor.has_alarm %}
-{%- for alarm in [{'state': 'armed_away', 'friendly_name': 'uzbrojony', 'blinds': 'close', 'light_scripts': ['turn_off_downstairs_lights', 'turn_off_outdoors_lights']}, {'state': 'disarmed', 'friendly_name': 'rozbrojony', 'blinds': 'open', 'light_scripts': ['turn_off_upstairs_lights', 'turn_off_attic_lights']}] %}
+{%- for alarm in [
+    {
+        'state': 'armed_away',
+        'friendly_name': 'uzbrojony',
+        'blinds': 'close',
+        'light_scripts': ['turn_off_downstairs_lights', 'turn_off_outdoors_lights']
+    },
+    {
+        'state': 'disarmed',
+        'friendly_name': 'rozbrojony',
+        'blinds': 'open',
+        'light_scripts': ['turn_off_upstairs_lights', 'turn_off_attic_lights']
+    }
+] %}
 - id: "{{ floor.id }}_alarm_{{ alarm.state }}"
   alias: "Alarm {{ alarm.friendly_name }} {{ floor.friendly_name | lower }}"
   trigger:
@@ -18,3 +31,14 @@
 {% endfor  %}
 {% endfor %}
 {% endfor %}
+
+- id: everyone_left_home
+  trigger:
+    - platform: state
+      entity_id:
+        - alarm_control_panel.upstairs_alarm
+      to: armed_away
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.circulator_socket
