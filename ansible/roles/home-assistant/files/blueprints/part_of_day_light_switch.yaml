@@ -7,6 +7,24 @@ blueprint:
       selector:
         entity:
           domain: light
+    morning_brightness_pct:
+      name: Morning brightness (percent)
+      selector:
+        number:
+          min: 1
+          max: 100
+    evening_brightness_pct:
+      name: Evening brightness (percent)
+      selector:
+        number:
+          min: 1
+          max: 100
+    night_brightness_pct:
+      name: Night brightness (percent)
+      selector:
+        number:
+          min: 1
+          max: 100
 
 mode: restart
 max_exceeded: silent
@@ -25,18 +43,22 @@ condition:
     state: "on"
 
 action:
+  - variables:
+      morning_brightness_pct: !input morning_brightness_pct
+      evening_brightness_pct: !input evening_brightness_pct
+      night_brightness_pct: !input night_brightness_pct
   - alias: "Turn on the light"
     service: light.turn_on
     target:
       entity_id: !input light_switch
     data:
-      brightness: >
+      brightness_pct: >
           {% if is_state('input_select.part_of_day', 'Wieczór') %}
-            100
+            {{ morning_brightness_pct }}
           {% elif is_state('input_select.part_of_day', 'Ranek') %}
-            95
+            {{ evening_brightness_pct }}
           {% elif is_state('input_select.part_of_day', 'Noc') %}
-            75
+            {{ night_brightness_pct }}
           {% else %}
-            255
+            100
           {% endif %}

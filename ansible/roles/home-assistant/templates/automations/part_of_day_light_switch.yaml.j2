@@ -6,6 +6,9 @@
     path: part_of_day_light_switch.yaml
     input:
       light_switch: light.{{ light_switch.device_id }}{{ light_part.suffix }}
+      morning_brightness_pct: {{ light_part.morning_brightness_pct | default(35) }}
+      evening_brightness_pct: {{ light_part.evening_brightness_pct | default(40) }}
+      night_brightness_pct: {{ light_part.night_brightness_pct | default(29) }}
 {% endfor %}
 {% endfor %}
 
