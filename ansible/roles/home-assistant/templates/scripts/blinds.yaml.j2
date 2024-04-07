@@ -13,12 +13,14 @@
         option: "{{ state.state }}"
     - repeat:
         sequence:
+{% for blind in blinds if blind.floor == floor.id %}
           - alias: {{ state.friendly_name }} rolet
             service: cover.{{ state.action }}_cover
             target:
               entity_id:
-{% for blind in blinds if blind.floor == floor.id %}
                 - cover.{{ blind.id }}
+          - delay:
+              seconds: 1
 {% endfor %}
           - delay:
               seconds: 60
