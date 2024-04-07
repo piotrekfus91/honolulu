@@ -3,6 +3,10 @@ views:
 
   - title: {{ floor.friendly_name }}
     cards:
+      - type: entities
+        entities:
+          - entity: script.open_{{ floor.id }}_blinds
+          - entity: script.close_{{ floor.id }}_blinds
 {%- for area in areas if area.floor == floor.id and area.has_blinds %}
 
       - type: entities
