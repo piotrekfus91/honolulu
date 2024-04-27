@@ -54,9 +54,9 @@ action:
     data:
       brightness_pct: >
           {% if is_state('input_select.part_of_day', 'Wieczór') %}
-            {{ morning_brightness_pct }}
-          {% elif is_state('input_select.part_of_day', 'Ranek') %}
             {{ evening_brightness_pct }}
+          {% elif is_state('input_select.part_of_day', 'Ranek') %}
+            {{ morning_brightness_pct }}
           {% elif is_state('input_select.part_of_day', 'Noc') %}
             {{ night_brightness_pct }}
           {% else %}
