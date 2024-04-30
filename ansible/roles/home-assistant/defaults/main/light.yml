@@ -25,6 +25,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Dolna łazienka górne światło
+        night_brightness_pct: 23
 
   - device_id: "downstairs_bathroom_mirror_light_switch"
     friendly_name: Dolna łazienka oświetlenie lustra
@@ -39,6 +40,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Dolna łazienka oświetlenie lustra
+        night_brightness_pct: 29
 
   - device_id: "living_room_light_switch"
     friendly_name: Salon światło
@@ -107,6 +109,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Kuchnia górne światło
+        night_brightness_pct: 24
 
   - device_id: "kitchen_countertop_light_switch"
     friendly_name: Kuchnia oświetlenie barku
@@ -121,6 +124,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Kuchnia oświetlenie barku
+        night_brightness_pct: 24
 
   - device_id: "mudroom_light_switch"
     friendly_name: Wiatrołap światło
