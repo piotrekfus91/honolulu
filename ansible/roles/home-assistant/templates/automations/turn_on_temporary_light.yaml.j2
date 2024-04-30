@@ -12,3 +12,24 @@
 {% endfor %}
       timeout_seconds: {{ temporary_light.timeout_seconds }}
 {% endfor %}
+
+- id: switch_off_washbasin_cabinet_backlight
+  alias: switch_off_washbasin_cabinet_backlight
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: state
+      entity_id:
+        - light.upstairs_bathroom_main_light_switch_l1
+        - light.upstairs_bathroom_main_light_switch_l2
+      to: "off"
+  condition:
+    - condition: state
+      entity_id:
+        - light.upstairs_bathroom_main_light_switch_l1
+        - light.upstairs_bathroom_main_light_switch_l2
+      state: "off"
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.upstairs_bathroom_washbasin_cabinet_backlight
