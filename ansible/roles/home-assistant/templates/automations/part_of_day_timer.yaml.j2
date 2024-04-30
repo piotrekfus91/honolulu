@@ -26,7 +26,7 @@
   alias: Evening mode on timer
   trigger:
     - platform: time
-      at: "20:00:00"
+      at: "21:00:00"
   action:
     - service: input_select.select_option
       target:
@@ -38,7 +38,7 @@
   alias: Night mode on timer
   trigger:
     - platform: time
-      at: "23:00:00"
+      at: "22:00:00"
   action:
     - service: input_select.select_option
       target:
