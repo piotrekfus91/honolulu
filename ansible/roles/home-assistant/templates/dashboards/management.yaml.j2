@@ -1,6 +1,17 @@
 views:
   - title: Ogólne
     cards:
+      - type: button
+        show_name: true
+        show_icon: true
+        type: button
+        tap_action:
+          action: call-service
+          service: script.trigger_garage_gate
+          target: {}
+        entity: binary_sensor.garage_gate_magnetic_sensor
+        name: Uruchomienie bramy
+        icon: mdi:garage
       - type: entities
         entities:
           - input_select.part_of_day
