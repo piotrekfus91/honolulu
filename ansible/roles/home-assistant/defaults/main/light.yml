@@ -288,14 +288,25 @@ light_switches:
         name: Oświetlenie nad łóżkiem w głównej sypialni
 
   - device_id: "master_bedroom_bed_backlight_light_switch"
-    friendly_name: Podświetlenie łóżka w głównej sypialni
+    friendly_name: Podświetlenie łóżka w głównej sypialni - przycisk
+    area_id: master_bedroom
+    dimmable: false
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Podświetlenie łóżka w głównej sypialni - przycisk
+
+  - device_id: "master_bedroom_bed_backlight_transmitter"
+    friendly_name: Podświetlenie łóżka w głównej sypialni - przekaźnik
     area_id: master_bedroom
     dimmable: true
     floor: upstairs
     parts:
       - id: L1
         suffix:
-        name: Podświetlenie łóżka w głównej sypialni
+        name: Podświetlenie łóżka w głównej sypialni - przekaźnik
+        night_brightness_pct: 1
 
   - device_id: "walk_in_wardrobe_light_switch"
     friendly_name: Światło w garderobie
