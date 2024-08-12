@@ -1,0 +1,14 @@
+- id: septic_tank_full
+  alias: Szambo jest pełne
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.septic_tank_level_sensor
+      to: "on"
+  action:
+    - service: todoist.new_task
+      data:
+        project: Wspólne
+        content: "Zgłosić\_szambo"
+        due_date_string: today
