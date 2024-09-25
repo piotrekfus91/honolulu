@@ -5,12 +5,18 @@ floors:
     has_lights: true
     has_blinds: true
     has_alarm: true
+    turn_off_lights_on_alarm_armed:
+      - turn_off_downstairs_lights
+      - turn_off_outdoors_lights
 
   - id: upstairs
     friendly_name: Piętro
     has_lights: true
     has_blinds: true
     has_alarm: true
+    turn_off_lights_on_alarm_armed:
+      - turn_off_upstairs_lights
+      - turn_off_attic_lights
 
   - id: attic
     friendly_name: Strych

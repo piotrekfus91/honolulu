@@ -4,13 +4,11 @@
         'state': 'armed_away',
         'friendly_name': 'uzbrojony',
         'blinds': 'close',
-        'light_scripts': ['turn_off_downstairs_lights', 'turn_off_outdoors_lights']
     },
     {
         'state': 'disarmed',
         'friendly_name': 'rozbrojony',
         'blinds': 'open',
-        'light_scripts': ['turn_off_upstairs_lights', 'turn_off_attic_lights']
     }
 ] %}
 - id: "{{ floor.id }}_alarm_{{ alarm.state }}"
@@ -24,11 +22,13 @@
     - parallel:
       - service: script.turn_on
         entity_id: script.{{ alarm.blinds }}_{{ floor.id }}_blinds
-{%- for light_script in alarm.light_scripts %}
+{% if alarm.state == 'armed_away' %}
+{%- for light_script in floor.turn_off_lights_on_alarm_armed %}
 
       - service: script.turn_on
         entity_id: script.{{ light_script }}
 {% endfor  %}
+{% endif %}
 {% endfor %}
 {% endfor %}
 
