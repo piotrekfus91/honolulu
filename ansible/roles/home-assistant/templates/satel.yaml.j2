@@ -1,5 +1,6 @@
 host: satel.honolulu.org
 port: 7094
+code: {{ satel.code }}
 partitions:
 
 {%- for partition in satel.partitions %}
@@ -15,4 +16,12 @@ zones:
 
   {{ zone.id }}:
     name: {{ zone.name }}
+{% endfor %}
+
+switchable_outputs:
+
+{%- for switchable_output in satel.switchable_outputs %}
+
+  {{ switchable_output.id }}:
+    name: {{ switchable_output.name }}
 {% endfor %}
