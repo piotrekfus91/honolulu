@@ -30,13 +30,23 @@ trigger:
     entity_id: !input input_entity
     to: "on"
 
+condition:
+  - condition: state
+    entity_id: !input light_to_turn_on
+    state: "off"
+
 action:
+  - variables:
+      light_to_turn_on: !input light_to_turn_on
   - alias: Turn on the light
     service: light.turn_on
     target:
       entity_id: !input light_to_turn_on
+  - delay:
+      seconds: 1
   - alias: Wait
-    delay:
+    wait_template: "{{ expand(light_to_turn_on) | selectattr('state', 'eq', 'on') | list | count == 0 }}"
+    timeout:
       seconds: !input timeout_seconds
   - alias: Turn off the light
     service: light.turn_off
