@@ -4,73 +4,91 @@ blinds:
     friendly_name: Roleta lewa w salonie
     area: living_room
     floor: downstairs
+    cardinal_direction: south
   - id: living_room_blind_right
     friendly_name: Roleta prawa w salonie
     area: living_room
     floor: downstairs
+    cardinal_direction: south
   - id: dining_room_blind
     friendly_name: Roleta w jadalni
     area: living_room
     floor: downstairs
+    cardinal_direction: west
   - id: kitchen_blind
     friendly_name: Roleta w kuchni
     area: kitchen
     floor: downstairs
+    cardinal_direction: north
   - id: office_east_blind
     friendly_name: Roleta wschodnia w gabinecie
     area: office
     floor: downstairs
+    cardinal_direction: south
   - id: office_west_blind
     friendly_name: Roleta zachodnia w gabinecie
     area: office
     floor: downstairs
+    cardinal_direction: south
   - id: garage_blind
     friendly_name: Roleta w garażu
     area: garage
     floor: downstairs
+    cardinal_direction: west
 
   # upstairs
   - id: master_bedroom_east_blind
     friendly_name: Roleta wschodnia w głównej sypialni
     area: master_bedroom
     floor: upstairs
+    cardinal_direction: east
   - id: master_bedroom_north_blind
     friendly_name: Roleta północna w głównej sypialni
     area: master_bedroom
     floor: upstairs
+    cardinal_direction: north
   - id: guest_room_north_blind
     friendly_name: Roleta północna w gościnnym
     area: guest_room
     floor: upstairs
+    cardinal_direction: north
   - id: guest_room_west_blind
     friendly_name: Roleta zachodnia w gościnnym
     area: guest_room
     floor: upstairs
+    cardinal_direction: west
   - id: upstairs_bathroom_blind
     friendly_name: Roleta w górnej łazience
     area: upstairs_bathroom
     floor: upstairs
+    cardinal_direction: west
   - id: laundry_room_blind
     friendly_name: Roleta w pralni
     area: laundry_room
     floor: upstairs
+    cardinal_direction: west
   - id: west_bedroom_south_blind
     friendly_name: Roleta południowa w zachodniej sypialni
     area: west_bedroom
     floor: upstairs
+    cardinal_direction: south
   - id: west_bedroom_west_blind
     friendly_name: Roleta zachodnia w zachodniej sypialni
     area: west_bedroom
     floor: upstairs
+    cardinal_direction: west
   - id: south_bedroom_blind
     friendly_name: Roleta w południowej sypialni
     area: south_bedroom
     floor: upstairs
+    cardinal_direction: south
   - id: east_bedroom_east_blind
     friendly_name: Roleta wschodnia w sypialni wschodniej
     area: east_bedroom
     floor: upstairs
+    cardinal_direction: east
   - id: east_bedroom_south_blind
     friendly_name: Roleta południowa w sypialni wschodniej
     area: east_bedroom
     floor: upstairs
+    cardinal_direction: south

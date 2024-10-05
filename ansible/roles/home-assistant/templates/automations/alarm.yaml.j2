@@ -8,7 +8,7 @@
     {
         'state': 'disarmed',
         'friendly_name': 'rozbrojony',
-        'blinds': 'open',
+        'blinds': 'auto',
     }
 ] %}
 - id: "{{ floor.id }}_alarm_{{ alarm.state }}"
@@ -19,6 +19,11 @@
         - alarm_control_panel.{{ floor.id }}_alarm
       to: "{{ alarm.state }}"
   action:
+{% for blind in blinds %}
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.{{ blind.id }}_manually_managed
+{% endfor %}
     - parallel:
       - service: script.turn_on
         entity_id: script.{{ alarm.blinds }}_{{ floor.id }}_blinds

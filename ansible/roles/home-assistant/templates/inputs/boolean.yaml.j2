@@ -1,0 +1,7 @@
+{% for blind in blinds %}
+
+{{ blind.id }}_manually_managed:
+  name: Ręczne ustawianie - {{ blind.friendly_name | lower }}
+  initial: false
+  icon: mdi:blinds
+{% endfor %}

@@ -7,6 +7,7 @@ views:
         entities:
           - entity: script.open_{{ floor.id }}_blinds
           - entity: script.close_{{ floor.id }}_blinds
+          - entity: script.auto_{{ floor.id }}_blinds
 {%- for area in areas if area.floor == floor.id and area.has_blinds %}
 
       - type: entities
@@ -17,6 +18,8 @@ views:
           - entity: cover.{{ blind.id }}
             name: {{ blind.friendly_name }}
             icon: mdi:blinds
+          - entity: input_boolean.{{ blind.id }}_manually_managed
+            name: {{ blind.friendly_name }} - ręczne ustawianie
         {% endfor %}
 {% endfor %}
 {% endfor %}

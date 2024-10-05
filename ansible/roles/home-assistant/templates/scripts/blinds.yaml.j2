@@ -1,10 +1,19 @@
 {%- for floor in floors if floor.has_blinds %}
-{%- for state in [{'action': 'open', 'state': 'opening', 'friendly_name': 'Otwieranie', 'desired_states': ['open', 'opening'], 'break_script_prefix': 'close'}, {'action': 'close', 'state': 'closing', 'friendly_name': 'Zamykanie', 'desired_states': ['closed', 'closing'], 'break_script_prefix': 'open'}] %}
+{%- for state in [
+    {'action': 'auto', 'state': 'opening', 'friendly_name': 'Automatyczna pozycja', 'desired_state': 'open', 'break_script_prefix': 'close'},
+    {'action': 'open', 'state': 'opening', 'target_position': 100, 'friendly_name': 'Otwieranie', 'desired_state': 'open', 'break_script_prefix': 'close'},
+    {'action': 'close', 'state': 'closing', 'target_position': 0, 'friendly_name': 'Zamykanie', 'desired_state': 'closed', 'break_script_prefix': 'open'},
+] %}
 
 {{ state.action }}_{{ floor.id }}_blinds:
   mode: restart
   alias: {{ state.friendly_name }} rolet {{ floor.friendly_name | lower }}
   sequence:
+    - variables:
+{% for blind in blinds if blind.floor == floor.id %}
+        {{ blind.id }}_target_position: "{{ state.target_position | default('{{ states(\'input_number.' + blind.id + '_target_position\') }}') }}"
+{% endfor %}
+
     - alias: set state
       service: input_select.select_option
       target:
@@ -14,63 +23,51 @@
     - repeat:
         sequence:
 {% for blind in blinds if blind.floor == floor.id %}
-          - alias: {{ state.friendly_name }} rolet
-            service: cover.{{ state.action }}_cover
-            target:
-              entity_id:
-                - cover.{{ blind.id }}
+          - if:
+            - condition: and
+              conditions:
+              - condition: template
+                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'position') | int) - {{ blind.id}}_target_position | int) | abs >= 5  }}"
+              - condition: state
+                entity_id: input_boolean.{{ blind.id }}_manually_managed
+                state: "off"
+            then:
+{% if state.target_position is defined %}
+              - service: cover.{{ state.action }}_cover
+{% else %}
+              - service: cover.set_cover_position
+                data:
+                  position: "{%raw %}{{{% endraw %} {{ blind.id }}_target_position }}"
+{% endif %}
+                target:
+                  entity_id:
+                    - cover.{{ blind.id }}
           - delay:
               seconds: 1
 {% endfor %}
           - delay:
-              seconds: 60
+              seconds: 20
         until:
           - condition: or
             conditions:
+            - condition: and
+              conditions:
+{% for blind in blinds if blind.floor == floor.id %}
+              - condition: template
+                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'position') | int) - {{ blind.id }}_target_position | int) | abs < 5 }}"
+{% endfor %}
               - condition: state
                 entity_id:
 {% for blind in blinds if blind.floor == floor.id %}
                   - cover.{{ blind.id }}
 {% endfor %}
-                state:
-{% for desired_state in state.desired_states %}
-                  - {{ desired_state }}
-{% endfor %}
-              - "{% raw %}{{{% endraw %} not is_state('input_select.blinds_{{ floor.id }}_script_state', '{{ state.state }}') }}"
-              - "{% raw %}{{{% endraw %} repeat.index >= 10 }}"
-
-    - if:
-        condition: state
-        entity_id:
-{% for blind in blinds if blind.floor == floor.id %}
-          - cover.{{ blind.id }}
-{% endfor %}
-        state:
-{% for desired_state in state.desired_states %}
-                  - {{ desired_state }}
-{% endfor %}
-      then:
-        service: notify.notify
-        data:
-          message: "{{ state.friendly_name }} rolet {{ floor.friendly_name | lower }} udane"
-      else:
-        service: notify.notify
-        data:
-          message: "{{ state.friendly_name }} rolet {{ floor.friendly_name | lower }} nieudane"
-
-    - condition: state
-      entity_id: input_select.blinds_{{ floor.id }}_script_state
-      state:
-{% for desired_state in state.desired_states %}
-        - {{ desired_state }}
-{% endfor %}
+                state: {{ state.desired_state }}
+            - "{% raw %}{{{% endraw %} repeat.index >= {{ 2 if state.action == 'auto' else 10 }} }}"
 
     - alias: unset state
-      service: input_select.select_option
+      service: script.turn_on
       target:
-        entity_id: input_select.blinds_{{ floor.id }}_script_state
-      data:
-        option: "none"
+        entity_id: script.stop_{{ floor.id }}_blinds
 {% endfor %}
 
 stop_{{ floor.id }}_blinds:

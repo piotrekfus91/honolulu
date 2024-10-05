@@ -1,0 +1,151 @@
+{% for blind in blinds %}
+- id: {{ blind.id }}_position_calculator
+  mode: single
+  max_exceeded: silent
+  alias: {{ blind.friendly_name }} - przeliczenie pozycji
+  trigger:
+    - platform: time_pattern
+      minutes: "/15"
+  action:
+    - variables:
+        cardinal_direction: {{ blind.cardinal_direction }}
+    - if:
+        condition: template
+        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'north' }}"
+      then:
+        - if:
+            condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 290
+          then:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 30
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+          else:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 90
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+    - if:
+        condition: template
+        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'west' }}"
+      then:
+        - if:
+            condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 180
+            below: 300
+          then:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 30
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+          else:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 90
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+    - if:
+        condition: template
+        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'south' }}"
+      then:
+        - if:
+            condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 90
+            below: 220
+          then:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 30
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+          else:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 90
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+    - if:
+        condition: template
+        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'east' }}"
+      then:
+        - if:
+            condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 20
+            below: 150
+          then:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 30
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+          else:
+            - service: input_number.set_value
+              metadata: {}
+              data:
+                value: 90
+              target:
+                entity_id: input_number.{{ blind.id }}_target_position
+
+- id: set_{{ blind.id }}_manually_managed
+  alias: Ustawienie ręczne - {{ blind.friendly_name | lower }}
+  use_blueprint:
+    path: set_blind_manually_managed.yaml
+    input:
+      blind: cover.{{ blind.id }}
+      blind_manually_managed: input_boolean.{{ blind.id }}_manually_managed
+      close_script: script.close_{{ blind.floor }}_blinds
+      open_script: script.open_{{ blind.floor }}_blinds
+      auto_script: script.auto_{{ blind.floor }}_blinds
+
+- id: reset_{{ blind.id }}_manually_managed
+  alias: Resetowanie ustawienia ręcznego - {{ blind.friendly_name | lower }}
+  use_blueprint:
+    path: reset_blind_manually_managed.yaml
+    input:
+      blind_manually_managed: input_boolean.{{ blind.id }}_manually_managed
+
+{% endfor %}
+
+{% for floor in floors %}
+- id: run_auto_{{ floor.id }}_blinds
+  mode: single
+  max_exceeded: silent
+  alias: {{ floor.friendly_name }} - uruchomienie pozycji automatycznej
+  trigger:
+    - platform: time_pattern
+      minutes: "/15"
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: alarm_control_panel.upstairs_alarm
+          state: "armed_away"
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 0
+  action:
+    - delay:
+        minutes: 1
+    - service: script.turn_on
+      entity_id: script.auto_{{ floor.id }}_blinds
+{% endfor %}

@@ -1,0 +1,27 @@
+blueprint:
+  name: Reset blind manually managed
+  domain: automation
+  input:
+    blind_manually_managed:
+      name: Blind manually managed
+      selector:
+        entity:
+          domain: input_boolean
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: !input blind_manually_managed
+    to: "on"
+
+action:
+  - variables:
+      blind_manually_managed: !input blind_manually_managed # to use in templates
+  - wait_template: "{{ is_state(blind_manually_managed, 'off') }}"
+    timeout:
+      hours: 12
+  - action: input_boolean.turn_off
+    target:
+      entity_id: !input blind_manually_managed

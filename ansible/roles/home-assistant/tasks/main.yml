@@ -51,8 +51,8 @@
   tags: scripts
 
 - name: upload inputs
-  copy:
+  template:
     src: "{{ item }}"
-    dest: "config/inputs/{{ item | basename }}"
-  with_fileglob: "{{ role_path }}/files/inputs/**.yaml"
+    dest: "config/inputs/{{ item | basename | regex_replace('\\.j2$', '') }}"
+  with_fileglob: "{{ role_path }}/templates/inputs/**.yaml.j2"
   tags: inputs

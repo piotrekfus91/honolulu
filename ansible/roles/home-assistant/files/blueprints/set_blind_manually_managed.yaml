@@ -1,0 +1,59 @@
+blueprint:
+  name: Set blind manually managed
+  domain: automation
+  input:
+    blind:
+      name: Blind
+      selector:
+        entity:
+          domain: cover
+    blind_manually_managed:
+      name: Blind manually managed
+      selector:
+        entity:
+          domain: input_boolean
+    close_script:
+      name: Closing script
+      selector:
+        entity:
+          domain: script
+    open_script:
+      name: Opening script
+      selector:
+        entity:
+          domain: script
+    auto_script:
+      name: Auto position script
+      selector:
+        entity:
+          domain: script
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: !input blind
+
+condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: !input close_script
+      state: "off"
+    - condition: state
+      entity_id: !input open_script
+      state: "off"
+    - condition: state
+      entity_id: !input auto_script
+      state: "off"
+
+action:
+  - action: input_boolean.turn_on
+    target:
+      entity_id: !input blind_manually_managed
+  - delay:
+      hours: 1
+  - action: input_boolean.turn_off
+    target:
+      entity_id: !input blind_manually_managed

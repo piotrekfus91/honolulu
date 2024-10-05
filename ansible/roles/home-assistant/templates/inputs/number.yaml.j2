@@ -1,0 +1,9 @@
+{% for blind in blinds %}
+
+{{ blind.id }}_target_position:
+  name: Pozycja docelowa - {{ blind.friendly_name | lower }}
+  initial: 100
+  min: 0
+  max: 100
+  icon: mdi:blinds
+{% endfor %}
