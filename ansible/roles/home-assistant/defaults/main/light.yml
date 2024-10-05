@@ -397,6 +397,19 @@ light_switches:
         suffix:
         name: Światło przed drzwiami bocznymi
 
+  - device_id: "upstairs_terrace_light_switch"
+    friendly_name: Światło na górnym tarasie
+    area_id: outdoors
+    dimmable: false
+    floor: outdoors
+    parts:
+      - id: L1
+        suffix: _l1
+        name: Światło na górnym tarasie - lewe
+      - id: L2
+        suffix: _l2
+        name: Światło na górnym tarasie - prawe
+
 temporary_lights:
   - id: garage_temporary_light
     friendly_name: Tymczasowe światło - garaż
