@@ -29,12 +29,19 @@
   with_fileglob: "{{ role_path }}/templates/dashboards/**.yaml.j2"
   tags: dashboards
 
-- name: upload blueprints
+- name: upload automations blueprints
   copy:
     src: "{{ item }}"
     dest: "config/blueprints/automation/{{ item | basename }}"
-  with_fileglob: "{{ role_path }}/files/blueprints/**.yaml"
+  with_fileglob: "{{ role_path }}/files/blueprints/automations/**.yaml"
   tags: automations
+
+- name: upload scripts blueprints
+  copy:
+    src: "{{ item }}"
+    dest: "config/blueprints/script/{{ item | basename }}"
+  with_fileglob: "{{ role_path }}/files/blueprints/scripts/**.yaml"
+  tags: scripts
 
 - name: upload automations
   template:

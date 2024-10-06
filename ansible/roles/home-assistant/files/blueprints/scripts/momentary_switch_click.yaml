@@ -1,0 +1,22 @@
+blueprint:
+  name: Momentary switch click
+  domain: script
+  input:
+    input_switch:
+      name: Input switch
+      selector:
+        entity:
+          domain: switch
+
+mode: single
+max_exceeded: silent
+
+sequence:
+  - service: switch.turn_on
+    target:
+      entity_id: !input input_switch
+  - delay:
+      seconds: 1
+  - service: switch.turn_off
+    target:
+      entity_id: !input input_switch

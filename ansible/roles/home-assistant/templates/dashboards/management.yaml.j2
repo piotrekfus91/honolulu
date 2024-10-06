@@ -10,7 +10,18 @@ views:
           service: script.trigger_garage_gate
           target: {}
         entity: binary_sensor.garage_gate_magnetic_sensor
-        name: Uruchomienie bramy
+        name: Uruchomienie bramy garażowej
+        icon: mdi:garage
+      - type: button
+        show_name: true
+        show_icon: true
+        type: button
+        tap_action:
+          action: call-service
+          service: script.trigger_entrance_gate
+          target: {}
+        entity: binary_sensor.entrance_gate_magnetic_sensor
+        name: Uruchomienie bramy wjazdowej
         icon: mdi:garage
       - type: entities
         entities:

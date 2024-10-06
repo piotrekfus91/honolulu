@@ -1,0 +1,13 @@
+trigger_garage_gate:
+  alias: Uruchom bramę garażową
+  use_blueprint:
+    path: momentary_switch_click.yaml
+    input:
+      input_switch: switch.garage_gate_switch
+
+trigger_entrance_gate:
+  alias: Uruchom bramę wjazdową
+  use_blueprint:
+    path: momentary_switch_click.yaml
+    input:
+      input_switch: switch.entrance_gate_satel_output
