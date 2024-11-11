@@ -7,103 +7,11 @@
     - platform: time_pattern
       minutes: "/15"
   action:
-    - variables:
+    - action: script.calculate_blind_position
+      data:
         cardinal_direction: {{ blind.cardinal_direction }}
-    - if:
-        condition: template
-        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'north' }}"
-      then:
-        - if:
-            condition: numeric_state
-            entity_id: sun.sun
-            attribute: azimuth
-            above: 290
-          then:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 30
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
-          else:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 90
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
-    - if:
-        condition: template
-        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'west' }}"
-      then:
-        - if:
-            condition: numeric_state
-            entity_id: sun.sun
-            attribute: azimuth
-            above: 180
-            below: 300
-          then:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 30
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
-          else:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 90
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
-    - if:
-        condition: template
-        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'south' }}"
-      then:
-        - if:
-            condition: numeric_state
-            entity_id: sun.sun
-            attribute: azimuth
-            above: 90
-            below: 220
-          then:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 30
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
-          else:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 90
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
-    - if:
-        condition: template
-        value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'east' }}"
-      then:
-        - if:
-            condition: numeric_state
-            entity_id: sun.sun
-            attribute: azimuth
-            above: 20
-            below: 150
-          then:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 30
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
-          else:
-            - service: input_number.set_value
-              metadata: {}
-              data:
-                value: 90
-              target:
-                entity_id: input_number.{{ blind.id }}_target_position
+        blind_id: {{ blind.id }}
+        floor: {{ blind.floor }}
 
 - id: set_{{ blind.id }}_manually_managed
   alias: Ustawienie ręczne - {{ blind.friendly_name | lower }}
@@ -125,7 +33,7 @@
 
 {% endfor %}
 
-{% for floor in floors %}
+{% for floor in floors if floor.has_blinds %}
 - id: run_auto_{{ floor.id }}_blinds
   mode: single
   max_exceeded: silent

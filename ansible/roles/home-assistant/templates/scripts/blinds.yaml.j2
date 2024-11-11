@@ -88,3 +88,119 @@ stop_{{ floor.id }}_blinds:
           - cover.{{ blind.id }}
 {% endfor %}
 {% endfor %}
+
+calculate_blind_position:
+  mode: single
+  max_exceeded: silent
+  alias: Przeliczenie pozycji rolety
+  fields:
+    blind_id: {}
+    cardinal_direction: {}
+    floor: {}
+  sequence:
+    - if:
+         condition: template
+         value_template: "{% raw %}{{{% endraw %} (floor == 'downstairs' and states.sensor.living_room_temperature_sensor_temperature.attributes.temperature < 23) or (floor == 'upstairs' and states.sensor.master_bedroom_temperature_sensor_temperature.attributes.temperature < 23) }}"
+      then:
+        - service: input_number.set_value
+          metadata: {}
+          data:
+            value: 100
+          target:
+            entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+      else:
+        - if:
+            condition: template
+            value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'north' }}"
+          then:
+            - if:
+                condition: numeric_state
+                entity_id: sun.sun
+                attribute: azimuth
+                above: 290
+              then:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 30
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+              else:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 90
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+        - if:
+            condition: template
+            value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'west' }}"
+          then:
+            - if:
+                condition: numeric_state
+                entity_id: sun.sun
+                attribute: azimuth
+                above: 180
+                below: 300
+              then:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 30
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+              else:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 90
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+        - if:
+            condition: template
+            value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'south' }}"
+          then:
+            - if:
+                condition: numeric_state
+                entity_id: sun.sun
+                attribute: azimuth
+                above: 90
+                below: 220
+              then:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 30
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+              else:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 90
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+        - if:
+            condition: template
+            value_template: "{% raw %}{{{% endraw %} cardinal_direction == 'east' }}"
+          then:
+            - if:
+                condition: numeric_state
+                entity_id: sun.sun
+                attribute: azimuth
+                above: 20
+                below: 150
+              then:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 30
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+              else:
+                - service: input_number.set_value
+                  metadata: {}
+                  data:
+                    value: 90
+                  target:
+                    entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
