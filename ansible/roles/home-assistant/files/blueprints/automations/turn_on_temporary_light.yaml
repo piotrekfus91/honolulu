@@ -30,11 +30,6 @@ trigger:
     entity_id: !input input_entity
     to: "on"
 
-condition:
-  - condition: state
-    entity_id: !input light_to_turn_on
-    state: "off"
-
 action:
   - variables:
       light_to_turn_on: !input light_to_turn_on
