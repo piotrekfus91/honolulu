@@ -409,6 +409,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Światło na górnym tarasie - prawe
+
   - device_id: "drive_light_switch"
     friendly_name: Światło na podjeździe
     area_id: outdoors
