@@ -300,7 +300,7 @@ light_switches:
   - device_id: "master_bedroom_bed_backlight_transmitter"
     friendly_name: Podświetlenie łóżka w głównej sypialni - przekaźnik
     area_id: master_bedroom
-    dimmable: true
+    dimmable: false
     floor: upstairs
     parts:
       - id: L1
