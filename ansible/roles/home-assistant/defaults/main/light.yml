@@ -25,7 +25,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Dolna łazienka górne światło
-        night_brightness_pct: 23
+        night_brightness_pct: 27
 
   - device_id: "downstairs_bathroom_mirror_light_switch"
     friendly_name: Dolna łazienka oświetlenie lustra
@@ -246,6 +246,7 @@ light_switches:
       - id: L1
         suffix:
         name: Górna łazienka podświetlenie szafki z umywalkami
+        night_brightness_pct: 2
 
   - device_id: "guest_room_light_switch"
     friendly_name: Światło w gościnnym
@@ -306,7 +307,6 @@ light_switches:
       - id: L1
         suffix:
         name: Podświetlenie łóżka w głównej sypialni - przekaźnik
-        night_brightness_pct: 1
 
   - device_id: "walk_in_wardrobe_light_switch"
     friendly_name: Światło w garderobie
