@@ -436,7 +436,7 @@ temporary_lights:
     timeout_seconds: 180
   - id: upstairs_bathroom_washbasin_cabinet_temporary_light
     friendly_name: Tymczasowe światło - podświetlenie pod umywalkami w górnej łazience
-    input: binary_sensor.upstairs_bathroom_motion_sensor
+    input: binary_sensor.upstairs_bathroom_side_motion_sensor_occupancy
     entities:
       - light.upstairs_bathroom_washbasin_cabinet_backlight
     timeout_seconds: 180
