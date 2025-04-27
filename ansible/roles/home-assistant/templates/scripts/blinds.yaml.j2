@@ -100,7 +100,7 @@ calculate_blind_position:
   sequence:
     - if:
          condition: template
-         value_template: "{% raw %}{{{% endraw %} (floor == 'downstairs' and states.sensor.living_room_temperature_sensor_temperature.attributes.temperature < 23) or (floor == 'upstairs' and states.sensor.master_bedroom_temperature_sensor_temperature.attributes.temperature < 23) }}"
+         value_template: "{% raw %}{{{% endraw %} (floor == 'downstairs' and states.sensor.living_room_temperature_sensor_temperature.attributes.temperature < 22) or (floor == 'upstairs' and states.sensor.master_bedroom_temperature_sensor_temperature.attributes.temperature < 22) }}"
       then:
         - service: input_number.set_value
           metadata: {}
