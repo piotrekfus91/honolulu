@@ -1,0 +1,11 @@
+battery_devices:
+  - id: sensor.garage_temperature_sensor_battery
+    name: Termometr w garażu
+  - id: sensor.living_room_temperature_sensor_battery
+    name: Termometr w salonie
+  - id: sensor.master_bedroom_temperature_sensor_battery
+    name: Termometr w sypialni
+  - id: sensor.upstairs_bathroom_side_motion_sensor_battery
+    name: Czujnik ruchu w górnej łazience
+  - id: sensor.upstairs_bathroom_temperature_sensor_battery
+    name: Termometr w górnej łazience

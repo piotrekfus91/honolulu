@@ -1,0 +1,10 @@
+{%- for battery_device in battery_devices %}
+- id: flat_battery_{{ battery_device.id }}
+  alias: Wyczerpana bateria - {{ battery_device.id }}
+  use_blueprint:
+    path: flat_battery.yaml
+    input:
+      sensor_id: {{ battery_device.id }}
+      sensor_name: {{ battery_device.name }}
+      threshold: {{ battery_device.threshold | default(5) }}
+{% endfor %}

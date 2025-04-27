@@ -1,0 +1,40 @@
+blueprint:
+  name: Flat battery automation
+  domain: automation
+  input:
+    sensor_id:
+      name: Sensor ID
+      selector:
+        entity:
+          domain: sensor
+    sensor_name:
+      name: Sensor name
+      selector:
+        text:
+    threshold:
+      name: Threshold
+      selector:
+        number:
+          min: 1
+          max: 100
+
+mode: single
+max_exceeded: silent
+
+trigger:
+  - platform: numeric_state
+    entity_id: !input sensor_id
+    below: !input threshold
+
+action:
+  - variables:
+      sensor_id: !input sensor_id
+      sensor_name: !input sensor_name
+  - service: todoist.new_task
+    data:
+      project: Wspólne
+      content: "Wymienić baterię {{ sensor_name }}"
+      due_date_string: today
+  - wait_template: "{{ states[sensor_id].attributes['battery'] > 50 }}"
+    timeout:
+      days: 7
