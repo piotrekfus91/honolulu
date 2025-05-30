@@ -1,0 +1,43 @@
+blueprint:
+  name: Entity on notifier
+  domain: automation
+  input:
+    entity_id:
+      name: Entity ID
+      selector:
+        entity:
+    entity_name:
+      name: Entity name
+      selector:
+        text:
+    in_state_time:
+      name: Time spent in on state
+      selector:
+        duration:
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: !input entity_id
+    to: "on"
+
+action:
+  - variables:
+      entity_name: !input entity_name
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: !input entity_id
+        to: "off"
+    timeout: !input in_state_time
+    continue_on_timeout: true
+  - if:
+      condition: state
+      entity_id: !input entity_id
+      state: "on"
+    then:
+      - action: notify.notify
+        data:
+          message: "{{ entity_name }}"
+          title: "Sprawdź urządzenie"

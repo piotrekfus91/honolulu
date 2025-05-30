@@ -26,6 +26,7 @@ light_switches:
         suffix: _l2
         name: Dolna łazienka górne światło
         night_brightness_pct: 27
+        notify_when_on_from: "00:30:00"
 
   - device_id: "downstairs_bathroom_mirror_light_switch"
     friendly_name: Dolna łazienka oświetlenie lustra
@@ -41,6 +42,7 @@ light_switches:
         suffix: _l2
         name: Dolna łazienka oświetlenie lustra
         night_brightness_pct: 29
+        notify_when_on_from: "00:30:00"
 
   - device_id: "living_room_light_switch"
     friendly_name: Salon światło
@@ -95,6 +97,7 @@ light_switches:
       - id: L1
         suffix:
         name: Spiżarnia światło
+        notify_when_on_from: "00:15:00"
 
   - device_id: "kitchen_main_light_switch"
     friendly_name: Kuchnia górne światło
@@ -135,9 +138,11 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Wiatrołap górne światło
+        notify_when_on_from: "00:10:00"
       - id: L2
         suffix: _l2
         name: Wiatrołap oświetlenie szafek
+        notify_when_on_from: "00:10:00"
 
   - device_id: "mudroom_auxiliary_light_switch"
     friendly_name: Wiatrołap - przycisk pomocniczy
@@ -159,9 +164,11 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Garaż światło przy kotłowni
+        notify_when_on_from: "02:00:00"
       - id: L2
         suffix: _l2
         name: Garaż światło przy wiatrołapie
+        notify_when_on_from: "02:00:00"
 
   - device_id: "boiler_room_light_switch"
     friendly_name: Kotłownia światło
@@ -176,6 +183,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Kotłownia światło
+        notify_when_on_from: "00:15:00"
 
   - device_id: "staircase_light_switch"
     friendly_name: Światło na schodach
@@ -196,6 +204,7 @@ light_switches:
       - id: L1
         suffix:
         name: Światło w pralni
+        notify_when_on_from: "00:20:00"
 
   - device_id: "upstairs_bathroom_main_light_switch"
     friendly_name: Górna łazienka światło górne
@@ -206,10 +215,12 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Górna łazienka światło górne
+        notify_when_on_from: "01:00:00"
       - id: L2
         suffix: _l2
         name: Górna łazienka LED pod prysznicem
         dimmable: false
+        notify_when_on_from: "01:00:00"
 
   - device_id: "upstairs_bathroom_left_mirror_light_switch"
     friendly_name: Górna łazienka światło przy lewym lustrze
@@ -220,9 +231,11 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Górna łazienka światło przy lewym lustrze górne
+        notify_when_on_from: "01:00:00"
       - id: L2
         suffix: _l2
         name: Górna łazienka światło przy lewym lustrze LED
+        notify_when_on_from: "00:15:00"
 
   - device_id: "upstairs_bathroom_right_mirror_light_switch"
     friendly_name: Górna łazienka światło przy prawym lustrze
@@ -233,9 +246,11 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Górna łazienka światło przy prawym lustrze LED
+        notify_when_on_from: "00:15:00"
       - id: L2
         suffix: _l2
         name: Górna łazienka światło przy prawym lustrze górne
+        notify_when_on_from: "00:15:00"
 
   - device_id: "upstairs_bathroom_washbasin_cabinet_backlight"
     friendly_name: Górna łazienka podświetlenie szafki z umywalkami
@@ -247,6 +262,7 @@ light_switches:
         suffix:
         name: Górna łazienka podświetlenie szafki z umywalkami
         night_brightness_pct: 2
+        notify_when_on_from: "01:00:00"
 
   - device_id: "guest_room_light_switch"
     friendly_name: Światło w gościnnym
@@ -267,6 +283,7 @@ light_switches:
       - id: L1
         suffix:
         name: Światło w schowku
+        notify_when_on_from: "00:05:00"
 
   - device_id: "master_bedroom_main_light_switch"
     friendly_name: Główne światło w głównej sypialni
@@ -317,9 +334,11 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Podświetlenie LED w garderobie
+        notify_when_on_from: "00:10:00"
       - id: L2
         suffix: _l2
         name: Górne światło w garderobie
+        notify_when_on_from: "00:10:00"
 
   - device_id: "west_bedroom_light_switch"
     friendly_name: Światło w zachodniej sypialni
@@ -376,6 +395,7 @@ light_switches:
       - id: L1
         suffix:
         name: Światło na strychu
+        notify_when_on_from: "00:15:00"
 
   - device_id: "front_door_light_switch"
     friendly_name: Światło przed drzwiami wejściowymi
@@ -386,6 +406,7 @@ light_switches:
       - id: L1
         suffix:
         name: Światło przed drzwiami wejściowymi
+        notify_when_on_from: "00:15:00"
 
   - device_id: "side_door_light_switch"
     friendly_name: Światło przed drzwiami bocznymi
@@ -396,6 +417,7 @@ light_switches:
       - id: L1
         suffix:
         name: Światło przed drzwiami bocznymi
+        notify_when_on_from: "00:15:00"
 
   - device_id: "upstairs_terrace_light_switch"
     friendly_name: Światło na górnym tarasie
@@ -406,9 +428,11 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Światło na górnym tarasie - lewe
+        notify_when_on_from: "00:15:00"
       - id: L2
         suffix: _l2
         name: Światło na górnym tarasie - prawe
+        notify_when_on_from: "00:15:00"
 
   - device_id: "drive_light_switch"
     friendly_name: Światło na podjeździe
@@ -419,6 +443,7 @@ light_switches:
       - id: L1
         suffix:
         name: Światło na podjeździe
+        notify_when_on_from: "00:15:00"
 
 temporary_lights:
   - id: garage_temporary_light
