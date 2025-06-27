@@ -386,6 +386,17 @@ light_switches:
         suffix:
         name: Światło w korytarzu
 
+  - device_id: "hallway_backlight"
+    friendly_name: Podświetlenie listew w korytarzu
+    area_id: hallway
+    dimmable: true
+    floor: upstairs
+    parts:
+      - id: L1
+        suffix:
+        name: Podświetlenie listew w korytarzu
+        notify_when_on_from: "00:05:00"
+
   - device_id: "attic_light_switch"
     friendly_name: Światło na strychu
     area_id: attic
@@ -465,6 +476,12 @@ temporary_lights:
     entities:
       - light.upstairs_bathroom_washbasin_cabinet_backlight
     timeout_seconds: 180
+  - id: hallway_backlight_temporary_light
+    friendly_name: Tymczasowe światło - podświetlenie w korytarzu
+    input: binary_sensor.hallway_motion_sensor
+    entities:
+      - light.hallway_backlight
+    timeout_seconds: 15
   - id: drive_temporary_light
     friendly_name: Tymczasowe światło - podjazd
     input:
