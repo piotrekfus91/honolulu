@@ -25,7 +25,10 @@ views:
         icon: mdi:garage
       - type: entities
         entities:
-          - light.stairs_backlight
+          - entity: light.stairs_backlight
+            name: Podświetlenie schodów
+          - entity: automation.tymczasowe_swiatlo_podswietlenie_w_korytarzu
+            name: Podświetlenie w korytarzu
       - type: entities
         entities:
           - input_select.part_of_day
