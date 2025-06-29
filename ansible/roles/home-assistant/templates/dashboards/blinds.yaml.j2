@@ -8,6 +8,7 @@ views:
           - entity: script.open_{{ floor.id }}_blinds
           - entity: script.close_{{ floor.id }}_blinds
           - entity: script.auto_{{ floor.id }}_blinds
+          - entity: automation.run_auto_{{ floor.id }}_blinds
 {%- for area in areas if area.floor == floor.id and area.has_blinds %}
 
       - type: entities
