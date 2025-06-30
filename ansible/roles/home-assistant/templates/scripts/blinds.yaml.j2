@@ -46,7 +46,7 @@
               seconds: 1
 {% endfor %}
           - delay:
-              seconds: 20
+              seconds: 60
         until:
           - condition: or
             conditions:
@@ -62,7 +62,7 @@
                   - cover.{{ blind.id }}
 {% endfor %}
                 state: {{ state.desired_state }}
-            - "{% raw %}{{{% endraw %} repeat.index >= {{ 2 if state.action == 'auto' else 10 }} }}"
+            - "{% raw %}{{{% endraw %} repeat.index >= {{ 1 if state.action == 'auto' else 10 }} }}"
 
     - alias: unset state
       service: script.turn_on
