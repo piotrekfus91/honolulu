@@ -1,0 +1,36 @@
+- name: install yq
+  apk:
+    name: yq
+    state: present
+
+- name: configure all devices as pessimistic
+  shell: yq e '.devices.*.optimistic = false' /config/zigbee2mqtt/configuration.yaml > /config/zigbee2mqtt/configuration.yaml.tmp
+
+- name: register diff
+  shell: diff /config/zigbee2mqtt/configuration.yaml /config/zigbee2mqtt/configuration.yaml.tmp | grep -v icon | grep -v 'data:image'
+  register: contents_identical
+  ignore_errors: true
+
+- name: break if no changes
+  meta: end_play
+  when: contents_identical.stdout == ""
+
+- debug:
+    msg: "{{ contents_identical.stdout.split('\n') }}"
+
+- name: confirm applying
+  pause:
+    prompt: "Diff found, continue [y/N]"
+  register: confirmation
+
+- name: break if not confirmed
+  meta: end_play
+  when: confirmation.user_input != "y"
+
+- name: create a backup
+  shell: cp /config/zigbee2mqtt/configuration.yaml /config/zigbee2mqtt/configuration.yaml.$(date -u "+%s")
+- name: override file
+  shell: mv /config/zigbee2mqtt/configuration.yaml.tmp /config/zigbee2mqtt/configuration.yaml
+
+- debug:
+    msg: "restart Zigbee2MQTT manually"

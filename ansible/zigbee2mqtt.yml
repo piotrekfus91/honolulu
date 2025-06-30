@@ -1,0 +1,3 @@
+- hosts: home_assistant
+  roles:
+    - zigbee2mqtt
