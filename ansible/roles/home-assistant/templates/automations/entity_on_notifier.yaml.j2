@@ -8,6 +8,7 @@
       entity_id: light.{{ light.device_id }}{{ part.suffix }}
       entity_name: {{ part.name }}
       in_state_time: {{ part.notify_when_on_from }}
+      url_to_open: {{ part.url_to_open }}
 {% endfor %}
 {% endfor %}
 
@@ -20,4 +21,5 @@
       entity_id: binary_sensor.{{ entity.name }}
       entity_name: {{ entity.friendly_name }}
       in_state_time: {{ entity.notify_when_active_from }}
+      url_to_open: {{ entity.url_to_open }}
 {% endfor %}
