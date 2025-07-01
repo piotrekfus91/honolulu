@@ -14,6 +14,10 @@ blueprint:
       name: Time spent in on state
       selector:
         duration:
+    url_to_open:
+      name: URL to be opened
+      selector:
+        text:
 
 mode: restart
 max_exceeded: silent
@@ -26,6 +30,7 @@ trigger:
 action:
   - variables:
       entity_name: !input entity_name
+      url_to_open: !input url_to_open
   - wait_for_trigger:
       - trigger: state
         entity_id: !input entity_id
@@ -41,3 +46,5 @@ action:
         data:
           message: "{{ entity_name }}"
           title: "Sprawdź urządzenie"
+          data:
+            clickAction: "{{ url_to_open }}"

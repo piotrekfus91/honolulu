@@ -2,6 +2,7 @@ views:
 {%- for floor in floors if floor.has_lights %}
 
   - title: {{ floor.friendly_name }}
+    path: {{ floor.id }}
     cards:
       - type: entities
         entities:

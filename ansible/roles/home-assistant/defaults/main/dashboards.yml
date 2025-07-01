@@ -1,16 +1,18 @@
 dashboards:
-
-  - id: dashboard-light
+  light:
     title: Oświetlenie
     icon: mdi:lightbulb
     filename: light.yaml
+    url: dashboard-light
 
-  - id: dashboard-blind
+  blind:
     title: Rolety
     icon: mdi:blinds
     filename: blinds.yaml
+    url: dashboard-blind
 
-  - id: dashboard-management
+  management:
     title: Zarządzanie
     icon: mdi:home-outline
     filename: management.yaml
+    url: dashboard-management

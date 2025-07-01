@@ -1,6 +1,6 @@
-{%- for dashboard in dashboards %}
+{%- for key, dashboard in dashboards.items() %}
 
-{{ dashboard.id }}:
+{{ dashboard.url }}:
   mode: yaml
   title: {{ dashboard.title }}
   icon: {{ dashboard.icon }}
