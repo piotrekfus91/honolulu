@@ -5,10 +5,25 @@
     update_cache: yes
 
 - name: deploy config file
-  copy:
-    src: nginx.conf
+  template:
+    src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
     owner: root
     group: root
   notify:
     - "restart nginx"
+
+- name: check if private key exists
+  stat:
+    path: /etc/nginx/nginx.key
+  register: nginx_private_key
+
+- name: generate private key
+  shell: openssl genrsa 4096 > /etc/nginx/nginx.key
+  when: not nginx_private_key.stat.exists
+
+- name: create cert folder
+  file:
+    name: /etc/nginx/certs
+    state: directory
+    mode: 0777

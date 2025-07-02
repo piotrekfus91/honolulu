@@ -1,2 +1,4 @@
 ports:
   prometheus: 9090
+
+acme_challenges_dir: /home/acme/challenges

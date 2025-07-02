@@ -1,0 +1,67 @@
+- name: install python
+  apt:
+    name: python3
+    state: present
+    update_cache: yes
+
+- name: create acme user
+  user:
+    name: acme
+
+- name: ensure permissions to restart nginx
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^acme'
+    line: 'acme    ALL=NOPASSWD: /usr/sbin/service nginx *'
+    validate: '/usr/sbin/visudo -cf %s'
+
+- name: download acme-tiny
+  get_url:
+    url: https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py
+    dest: /home/acme/acme_tiny.py
+    owner: acme
+
+- name: check if account key exists
+  stat:
+    path: /home/acme/account.key
+  register: account_key_check
+
+- name: generate account key
+  shell: openssl genrsa 4096 > /home/acme/account.key
+  when: not account_key_check.stat.exists
+
+- name: copy openssl config file
+  copy:
+    src: openssl.cnf
+    dest: /home/acme/openssl.cnf
+    owner: acme
+
+- name: generate CSR
+  shell: openssl req -new -key /etc/nginx/nginx.key -out /home/acme/honoluluorg.csr -config /home/acme/openssl.cnf -subj "/CN=honoluluorg.duckdns.org/"
+
+- name: create challenges directory
+  file:
+    path: "{{ acme_challenges_dir }}"
+    state: directory
+    owner: acme
+    group: acme
+
+- name: copy renew script
+  copy:
+    src: renew.sh
+    dest: /home/acme/renew.sh
+    owner: acme
+    group: acme
+    mode: 0755
+
+- name: run renew
+  shell: sudo su acme -c /home/acme/renew.sh
+
+- name: ensure crontab entry
+  cron:
+    name: acme-nginx
+    user: acme
+    weekday: "1"
+    hour: "0"
+    minute: "0"
