@@ -22,4 +22,5 @@
       entity_name: {{ entity.friendly_name }}
       in_state_time: {{ entity.notify_when_active_from }}
       url_to_open: {{ entity.url_to_open }}
+      {{ 'script_for_action: ' + entity.script_for_action if entity.script_for_action is defined }}
 {% endfor %}
