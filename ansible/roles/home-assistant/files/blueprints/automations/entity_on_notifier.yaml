@@ -29,6 +29,7 @@ trigger:
 
 action:
   - variables:
+      entity_id: !input entity_id
       entity_name: !input entity_name
       url_to_open: !input url_to_open
   - wait_for_trigger:
@@ -48,3 +49,13 @@ action:
           title: "Sprawdź urządzenie"
           data:
             clickAction: "{{ url_to_open }}"
+            tag: "entity_on_{{ entity_id }}"
+      - wait_for_trigger:
+        - trigger: state
+          entity_id: !input entity_id
+          to: "off"
+      - action: notify.notify
+        data:
+          message: "clear_notification"
+          data:
+            tag: "entity_on_{{ entity_id }}"
