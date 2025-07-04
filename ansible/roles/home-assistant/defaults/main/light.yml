@@ -416,6 +416,7 @@ light_switches:
         name: Podświetlenie listew w korytarzu
         notify_when_on_from: "00:05:00"
         url_to_open: "/{{ dashboards.light.url }}/upstairs"
+        night_brightness_pct: 2
 
   - device_id: "attic_light_switch"
     friendly_name: Światło na strychu
