@@ -12,7 +12,7 @@ http {
     server {
         server_name haos-honoluluorg.duckdns.org;
         listen 80;
-        listen 8443 ssl;
+        listen 443 ssl;
 
         location /.well-known/acme-challenge/ {
             alias /home/acme/challenges/;
@@ -30,7 +30,7 @@ http {
     server {
             server_name monitoring-honoluluorg.duckdns.org;
             listen 80;
-            listen 8443 ssl;
+            listen 443 ssl;
 
             location /.well-known/acme-challenge/ {
                 alias /home/acme/challenges/;
