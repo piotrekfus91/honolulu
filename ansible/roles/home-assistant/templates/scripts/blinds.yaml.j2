@@ -27,7 +27,7 @@
             - condition: and
               conditions:
               - condition: template
-                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'position') | int) - {{ blind.id}}_target_position | int) | abs >= 5  }}"
+                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'current_position') | int) - {{ blind.id}}_target_position | int) | abs >= 5  }}"
               - condition: state
                 entity_id: input_boolean.{{ blind.id }}_manually_managed
                 state: "off"
@@ -54,7 +54,7 @@
               conditions:
 {% for blind in blinds if blind.floor == floor.id %}
               - condition: template
-                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'position') | int) - {{ blind.id }}_target_position | int) | abs < 5 }}"
+                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'current_position') | int) - {{ blind.id }}_target_position | int) | abs < 5 }}"
 {% endfor %}
               - condition: state
                 entity_id:
