@@ -418,6 +418,7 @@ light_switches:
         url_to_open: "/{{ dashboards.light.url }}/upstairs"
         evening_brightness_pct: 10
         night_brightness_pct: 2
+        double_click_enabled: false
 
   - device_id: "attic_light_switch"
     friendly_name: Światło na strychu
