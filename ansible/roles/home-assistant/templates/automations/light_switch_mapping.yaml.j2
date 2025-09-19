@@ -4,10 +4,10 @@
   use_blueprint:
     path: light_switch_mapping.yaml
     input:
-      light_switch_input: light.{{ light_switch_mapping.from.device_id }}{{ ((light_switches | selectattr('device_id', 'equalto', light_switch_mapping.from.device_id) | first).parts | selectattr('id', 'equalto', light_switch_mapping.from.part_id) | first).suffix }}
+      light_switch_input: light.{{ light_switch_mapping.from.device_id }}{{ ((light_switches | selectattr('device_id', 'equalto', light_switch_mapping.from.device_id) | first).parts | selectattr('id', 'equalto', light_switch_mapping.from.part_id) | first).suffix or "" }}
       light_switch_output:
 {% for light_switch_mapping_to in light_switch_mapping.to %}
-        - light.{{ light_switch_mapping_to.device_id }}{{ ((light_switches | selectattr('device_id', 'equalto', light_switch_mapping_to.device_id) | first).parts | selectattr('id', 'equalto', light_switch_mapping_to.part_id) | first).suffix }}
+        - light.{{ light_switch_mapping_to.device_id }}{{ ((light_switches | selectattr('device_id', 'equalto', light_switch_mapping_to.device_id) | first).parts | selectattr('id', 'equalto', light_switch_mapping_to.part_id) | first).suffix or "" }}
 {% endfor %}
 
 {% endfor %}
