@@ -1,7 +1,7 @@
 - name: install nginx
   apt:
     name: nginx
-    state: latest
+    state: present
     update_cache: yes
 
 - name: deploy config file
@@ -27,3 +27,8 @@
     name: /etc/nginx/certs
     state: directory
     mode: 0777
+
+- name: configure logrotate
+  copy:
+    src: logrotate
+    dest: /etc/logrotate.d/nginx
