@@ -8,9 +8,13 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Biurko Piotrka
+        evening_brightness_pct: 30
+        night_brightness_pct: 25
       - id: L2
         suffix: _l2
         name: Biurko Moniki
+        evening_brightness_pct: 30
+        night_brightness_pct: 25
 
   - device_id: "downstairs_bathroom_main_light_switch"
     friendly_name: Dolna łazienka górne światło
