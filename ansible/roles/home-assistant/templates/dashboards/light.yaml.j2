@@ -16,7 +16,7 @@ views:
         {%- for light in light_switches if light.area_id == area.id %}
           {%- for light_part in light.parts if not light_part.technical | default(false) %}
 
-          - entity: light.{{light.device_id }}{{ light_part.suffix }}
+          - entity: light.{{light.device_id }}{{ light_part.suffix or "" }}
             name: {{ light_part.name }}
           {% endfor %}
         {% endfor %}
