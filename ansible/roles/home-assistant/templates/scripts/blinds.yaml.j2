@@ -117,7 +117,7 @@ calculate_blind_position:
                 condition: numeric_state
                 entity_id: sun.sun
                 attribute: azimuth
-                above: 290
+                above: 280
               then:
                 - service: input_number.set_value
                   metadata: {}
@@ -140,8 +140,8 @@ calculate_blind_position:
                 condition: numeric_state
                 entity_id: sun.sun
                 attribute: azimuth
-                above: 180
-                below: 300
+                above: 170
+                below: 310
               then:
                 - service: input_number.set_value
                   metadata: {}
@@ -164,8 +164,8 @@ calculate_blind_position:
                 condition: numeric_state
                 entity_id: sun.sun
                 attribute: azimuth
-                above: 90
-                below: 220
+                above: 70
+                below: 240
               then:
                 - service: input_number.set_value
                   metadata: {}
@@ -188,8 +188,8 @@ calculate_blind_position:
                 condition: numeric_state
                 entity_id: sun.sun
                 attribute: azimuth
-                above: 20
-                below: 150
+                above: 10
+                below: 170
               then:
                 - service: input_number.set_value
                   metadata: {}
