@@ -10,7 +10,7 @@ turn_off_{{ floor.id }}_lights:
           - alias: Wyłączanie {{ light_switch_part.name }}
             service: light.turn_off
             target:
-              entity_id: light.{{ light_switch.device_id }}{{ light_switch_part.suffix }}
+              entity_id: light.{{ light_switch.device_id }}{{ light_switch_part.suffix or "" }}
           - delay:
               seconds: 1
 {% endfor %}
@@ -24,7 +24,7 @@ turn_off_{{ floor.id }}_lights:
                 entity_id:
 {% for light_switch in light_switches if light_switch.floor == floor.id %}
 {%- for light_switch_part in light_switch.parts %}
-                  - light.{{ light_switch.device_id }}{{ light_switch_part.suffix }}
+                  - light.{{ light_switch.device_id }}{{ light_switch_part.suffix or "" }}
 {% endfor %}
 {% endfor %}
                 state: "off"

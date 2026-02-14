@@ -19,17 +19,6 @@ http:
   trusted_proxies:
     - 192.168.1.143
 
-panel_iframe:
-  zigbee2mqtt:
-    title: Zigbee2MQTT
-    icon: mdi:zigbee
-    url: http://haos.honolulu.org:8099
-    require_admin: true
-  grafana:
-    title: Grafana
-    icon: mdi:chart-timeline
-    url: http://monitoring.honolulu.org:3000
-
 lovelace:
   mode: yaml
   dashboards: !include dashboards.yaml
@@ -45,7 +34,5 @@ logger:
 prometheus:
   namespace: haos
   requires_auth: false
-
-satel_integra: !include satel.yaml
 
 script: !include_dir_merge_named scripts/

@@ -13,8 +13,6 @@
     - scripts
     - inputs
 
-- include_tasks: satel.yml
-
 - name: upload templates
   template:
     src: "{{ item }}.j2"
