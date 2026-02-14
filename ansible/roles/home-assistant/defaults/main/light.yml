@@ -357,6 +357,7 @@ light_switches:
         name: Podświetlenie LED w garderobie
         notify_when_on_from: "00:10:00"
         url_to_open: "/{{ dashboards.light.url }}/upstairs"
+        dimmable: false
       - id: L2
         suffix: _l2
         name: Górne światło w garderobie
@@ -372,9 +373,13 @@ light_switches:
       - id: L1
         suffix: _l1
         name: Światło z tyłu w zachodniej sypilani
+        evening_brightness_pct: 27
+        night_brightness_pct: 26
       - id: L2
         suffix: _l2
         name: Światło przy wejściu w zachodniej sypilani
+        evening_brightness_pct: 27
+        night_brightness_pct: 26
 
   - device_id: "south_bedroom_light_switch"
     friendly_name: Światło w południowej sypialni

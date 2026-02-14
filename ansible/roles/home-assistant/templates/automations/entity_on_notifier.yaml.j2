@@ -1,11 +1,11 @@
 {%- for light in light_switches %}
 {%- for part in light.parts if part.notify_when_on_from is defined %}
-- id: entity_on_{{ light.device_id }}{{ part.suffix }}
+- id: entity_on_{{ light.device_id }}{{ part.suffix or "" }}
   alias: Aktywne urządzenie - {{ part.name }}
   use_blueprint:
     path: entity_on_notifier.yaml
     input:
-      entity_id: light.{{ light.device_id }}{{ part.suffix }}
+      entity_id: light.{{ light.device_id }}{{ part.suffix or "" }}
       entity_name: {{ part.name }}
       in_state_time: {{ part.notify_when_on_from }}
       url_to_open: {{ part.url_to_open }}

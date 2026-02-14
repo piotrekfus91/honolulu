@@ -1,11 +1,11 @@
 {%- for light_switch in light_switches if light_switch.dimmable %}
 {%- for light_part in light_switch.parts if (not light_part.technical | default(false)) and (light_part.dimmable | default(true)) %}
-- id: part_of_day_{{ light_switch.device_id }}{{ light_part.suffix }}
-  alias: Pora dnia {{ light_switch.device_id }}{{ light_part.suffix }}
+- id: part_of_day_{{ light_switch.device_id }}{{ light_part.suffix or "" }}
+  alias: Pora dnia {{ light_switch.device_id }}{{ light_part.suffix or "" }}
   use_blueprint:
     path: part_of_day_light_switch.yaml
     input:
-      light_switch: light.{{ light_switch.device_id }}{{ light_part.suffix }}
+      light_switch: light.{{ light_switch.device_id }}{{ light_part.suffix or "" }}
       morning_brightness_pct: {{ light_part.morning_brightness_pct | default(35) }}
       evening_brightness_pct: {{ light_part.evening_brightness_pct | default(40) }}
       night_brightness_pct: {{ light_part.night_brightness_pct | default(29) }}
@@ -19,5 +19,5 @@
     input:
       light_switch: light.stairs_backlight
       morning_brightness_pct: 50
-      evening_brightness_pct: 20
-      night_brightness_pct: 20
+      evening_brightness_pct: 22
+      night_brightness_pct: 22

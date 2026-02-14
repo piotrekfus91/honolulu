@@ -1,10 +1,10 @@
 {%- for light_switch in light_switches if light_switch.dimmable %}
 {%- for light_part in light_switch.parts if (not light_part.technical | default(false)) and (light_part.dimmable | default(true)) and (light_part.double_click_enabled | default(true)) %}
-- id: double_click_{{ light_switch.device_id }}{{ light_part.suffix }}
-  alias: Dwuklik {{ light_switch.device_id }}{{ light_part.suffix }}
+- id: double_click_{{ light_switch.device_id }}{{ light_part.suffix or "" }}
+  alias: Dwuklik {{ light_switch.device_id }}{{ light_part.suffix or "" }}
   use_blueprint:
     path: light_switch_double_click.yaml
     input:
-      light_switch: light.{{ light_switch.device_id }}{{ light_part.suffix }}
+      light_switch: light.{{ light_switch.device_id }}{{ light_part.suffix or "" }}
 {% endfor %}
 {% endfor %}
