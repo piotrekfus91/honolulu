@@ -61,7 +61,7 @@
 - name: ensure crontab entry
   cron:
     name: acme-nginx
-    job: acme-nginx
+    job: /home/acme/renew.sh
     user: acme
     weekday: "1"
     hour: "0"
