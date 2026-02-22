@@ -3,7 +3,7 @@
     src: configuration.yaml
     dest: config/configuration.yaml
 
-- name: create {{ item }} dir
+- name: create dir
   file:
     path: config/{{ item }}
     state: directory

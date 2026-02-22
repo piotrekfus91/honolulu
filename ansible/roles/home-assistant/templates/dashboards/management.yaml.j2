@@ -48,3 +48,14 @@ views:
 
           - entity: script.turn_off_{{ floor.id }}_lights
 {% endfor %}
+      - type: entities
+        title: Pory dnia
+        entities:
+          - entity: input_datetime.part_of_day_morning_time
+            name: Godzina poranka
+          - entity: input_datetime.part_of_day_day_time
+            name: Godzina dnia
+          - entity: input_datetime.part_of_day_evening_time
+            name: Godzina wieczoru
+          - entity: input_datetime.part_of_day_night_time
+            name: Godzina nocy

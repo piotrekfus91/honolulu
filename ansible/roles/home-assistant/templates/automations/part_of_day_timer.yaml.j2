@@ -2,7 +2,7 @@
   alias: Morning mode on timer
   trigger:
     - platform: time
-      at: "05:30:00"
+      at: input_datetime.part_of_day_morning_time
   action:
     - service: input_select.select_option
       target:
@@ -14,7 +14,7 @@
   alias: Day mode on timer
   trigger:
     - platform: time
-      at: "07:00:00"
+      at: input_datetime.part_of_day_day_time
   action:
     - service: input_select.select_option
       target:
@@ -26,7 +26,7 @@
   alias: Evening mode on timer
   trigger:
     - platform: time
-      at: "20:00:00"
+      at: input_datetime.part_of_day_evening_time
   action:
     - service: input_select.select_option
       target:
@@ -38,7 +38,7 @@
   alias: Night mode on timer
   trigger:
     - platform: time
-      at: "22:00:00"
+      at: input_datetime.part_of_day_night_time
   action:
     - service: input_select.select_option
       target:
