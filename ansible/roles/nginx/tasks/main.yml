@@ -13,6 +13,18 @@
   notify:
     - "restart nginx"
 
+- name: make systemd dir
+  file:
+    path: /etc/systemd/system
+    state: directory
+
+- name: deploy systemd service file
+  copy:
+    src: nginx.service
+    dest: /etc/systemd/system
+  notify:
+    - "restart nginx"
+
 - name: check if private key exists
   stat:
     path: /etc/nginx/nginx.key
