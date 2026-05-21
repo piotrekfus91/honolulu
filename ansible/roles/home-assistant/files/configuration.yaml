@@ -20,7 +20,7 @@ http:
     - 192.168.1.143
 
 lovelace:
-  mode: yaml
+  resource_mode: yaml
   dashboards: !include dashboards.yaml
 
 input_boolean: !include inputs/boolean.yaml
