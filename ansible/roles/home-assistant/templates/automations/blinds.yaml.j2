@@ -23,6 +23,9 @@
       close_script: script.close_{{ blind.floor }}_blinds
       open_script: script.open_{{ blind.floor }}_blinds
       auto_script: script.auto_{{ blind.floor }}_blinds
+{% if blind.manually_managed_delay is defined %}
+      delay: {{ blind.manually_managed_delay }}
+{% endif %}
 
 - id: reset_{{ blind.id }}_manually_managed
   alias: Resetowanie ustawienia ręcznego - {{ blind.friendly_name | lower }}
@@ -52,7 +55,7 @@
       attribute: elevation
       above: 0
     - condition: time
-      after: "06:30:00"
+      after: "06:45:00"
       before: "19:30:00"
   action:
     - delay:

@@ -7,6 +7,11 @@ blueprint:
       selector:
         entity:
           domain: cover
+    delay:
+      name: Delay to wait before resetting
+      selector:
+        time:
+      default: "01:00:00"
     blind_manually_managed:
       name: Blind manually managed
       selector:
@@ -53,8 +58,7 @@ action:
   - action: input_boolean.turn_on
     target:
       entity_id: !input blind_manually_managed
-  - delay:
-      hours: 1
+  - delay: !input delay
   - action: input_boolean.turn_off
     target:
       entity_id: !input blind_manually_managed

@@ -42,11 +42,13 @@ blinds:
     area: master_bedroom
     floor: upstairs
     cardinal_direction: east
+    manually_managed_delay: "02:30:00"
   - id: master_bedroom_north_blind
     friendly_name: Roleta północna w głównej sypialni
     area: master_bedroom
     floor: upstairs
     cardinal_direction: north
+    manually_managed_delay: "02:30:00"
   - id: guest_room_north_blind
     friendly_name: Roleta północna w gościnnym
     area: guest_room
@@ -72,11 +74,13 @@ blinds:
     area: west_bedroom
     floor: upstairs
     cardinal_direction: south
+    manually_managed_delay: "02:00:00"
   - id: west_bedroom_west_blind
     friendly_name: Roleta zachodnia w zachodniej sypialni
     area: west_bedroom
     floor: upstairs
     cardinal_direction: west
+    manually_managed_delay: "02:00:00"
   - id: south_bedroom_blind
     friendly_name: Roleta w południowej sypialni
     area: south_bedroom
