@@ -5,7 +5,7 @@
   alias: {{ blind.friendly_name }} - przeliczenie pozycji
   trigger:
     - platform: time_pattern
-      minutes: "/15"
+      minutes: "/3"
   action:
     - action: script.calculate_blind_position
       data:
@@ -34,6 +34,15 @@
     input:
       blind_manually_managed: input_boolean.{{ blind.id }}_manually_managed
 
+- id: fix_{{ blind.id }}_set_position
+  alias: Naprawienie pozycji rolety - {{ blind.friendly_name | lower }}
+  use_blueprint:
+    path: fix_blind_set_position.yaml
+    input:
+      blind_id: {{ blind.id }}
+      entity_id: cover.{{ blind.id }}
+      input_blind: cover.{{ blind.id }}
+
 {% endfor %}
 
 {% for floor in floors if floor.has_blinds %}
@@ -43,7 +52,7 @@
   alias: {{ floor.friendly_name }} - uruchomienie pozycji automatycznej
   trigger:
     - platform: time_pattern
-      minutes: "/15"
+      minutes: "/3"
   condition:
     - condition: not
       conditions:

@@ -32,6 +32,11 @@
                 entity_id: input_boolean.{{ blind.id }}_manually_managed
                 state: "off"
             then:
+{% if state.target_position is not defined %}
+              - action: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
+{% endif %}
 {% if state.target_position is defined %}
               - service: cover.{{ state.action }}_cover
 {% else %}
@@ -44,6 +49,11 @@
                     - cover.{{ blind.id }}
           - delay:
               seconds: 1
+{% if state.target_position is not defined %}
+          - action: input_boolean.turn_off
+            target:
+              entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
+{% endif %}
 {% endfor %}
           - delay:
               seconds: 60

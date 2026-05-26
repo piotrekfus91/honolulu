@@ -1,0 +1,51 @@
+blueprint:
+  name: Fix blind position
+  domain: automation
+  input:
+    blind_id:
+      selector:
+        text:
+    entity_id:
+      selector:
+        text:
+    input_blind:
+      selector:
+        entity:
+          filter:
+            domain: cover
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: event
+    event_type: call_service
+    event_data:
+      domain: cover
+      service: set_cover_position
+      service_data:
+        entity_id: !input entity_id
+
+
+action:
+  - variables:
+      target_position: "{{ trigger.event.data.service_data.position | int }}"
+      blind_id: !input blind_id
+  - delay: "00:00:30"
+  - service: mqtt.publish
+    data:
+      topic: "zigbee2mqtt/{{ blind_id }}/get"
+      payload: '{"position": ""}'
+  - delay: "00:00:03"
+  - variables:
+      entity_id: !input entity_id
+      current_position: "{{ state_attr(entity_id, 'current_position') }}"
+  - if:
+      - condition: template
+        value_template: "{{ (current_position - target_position) | abs > 5 }}"
+    then:
+      - service: cover.set_cover_position
+        data:
+          position: "{{ target_position }}"
+        target:
+          entity_id: !input entity_id

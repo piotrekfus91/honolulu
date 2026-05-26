@@ -37,28 +37,44 @@ mode: restart
 max_exceeded: silent
 
 trigger:
-  - platform: state
-    entity_id: !input blind
-    to:
-
-condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: !input close_script
-      state: "off"
-    - condition: state
-      entity_id: !input open_script
-      state: "off"
-    - condition: state
-      entity_id: !input auto_script
-      state: "off"
+  - platform: event
+    event_type: call_service
+    event_data:
+      domain: cover
+      service: open_cover
+      service_data:
+        entity_id: !input blind
+  - platform: event
+    event_type: call_service
+    event_data:
+      domain: cover
+      service: close_cover
+      service_data:
+        entity_id: !input blind
+  - platform: event
+    event_type: call_service
+    event_data:
+      domain: cover
+      service: set_cover_position
+      service_data:
+        entity_id: !input blind
 
 action:
-  - action: input_boolean.turn_on
-    target:
-      entity_id: !input blind_manually_managed
-  - delay: !input delay
-  - action: input_boolean.turn_off
-    target:
-      entity_id: !input blind_manually_managed
+  - variables:
+      input_blind: !input blind
+      input_blind_id: "{{ input_blind.split('.')[1] }}"
+  - if:
+    - condition: template
+      value_template: "{{ is_state('input_boolean.' + input_blind_id, 'on') }}"
+    then:
+    - action: input_boolean.turn_off
+      target:
+        entity_id: "input_boolean.{{ input_blind_id }}_set_cover_position_by_script"
+    else:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: !input blind_manually_managed
+    - delay: !input delay
+    - action: input_boolean.turn_off
+      target:
+        entity_id: !input blind_manually_managed
