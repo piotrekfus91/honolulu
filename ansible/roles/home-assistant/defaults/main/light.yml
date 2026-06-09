@@ -119,7 +119,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Kuchnia górne światło
-        night_brightness_pct: 24
+        night_brightness_pct: 32
 
   - device_id: "kitchen_countertop_light_switch"
     friendly_name: Kuchnia oświetlenie barku
@@ -134,7 +134,7 @@ light_switches:
       - id: L2
         suffix: _l2
         name: Kuchnia oświetlenie barku
-        night_brightness_pct: 24
+        night_brightness_pct: 32
 
   - device_id: "mudroom_light_switch"
     friendly_name: Wiatrołap światło
