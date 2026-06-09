@@ -23,11 +23,13 @@
     - repeat:
         sequence:
 {% for blind in blinds if blind.floor == floor.id %}
+          - variables:
+              current_position: "{%raw%}{{{%endraw%} state_attr('cover.{{ blind.id }}', 'current_position') | int }}"
           - if:
             - condition: and
               conditions:
               - condition: template
-                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'current_position') | int) - {{ blind.id}}_target_position | int) | abs >= 5  }}"
+                value_template: "{% raw %}{{{% endraw %} (current_position - {{ blind.id}}_target_position) | abs >= 5  }}"
               - condition: state
                 entity_id: input_boolean.{{ blind.id }}_manually_managed
                 state: "off"
@@ -78,6 +80,11 @@
       service: script.turn_on
       target:
         entity_id: script.stop_{{ floor.id }}_blinds
+
+    - alias: run position fixing script
+      service: script.turn_on
+      target:
+        entity_id: script.fix_{{ floor.id }}_blinds_positions
 {% endfor %}
 
 stop_{{ floor.id }}_blinds:
@@ -224,3 +231,18 @@ calculate_blind_position:
                     value: 90
                   target:
                     entity_id: input_number.{% raw %}{{{% endraw %} blind_id }}_target_position
+
+{% for floor in floors if floor.has_blinds %}
+fix_{{ floor.id }}_blinds_positions:
+  mode: restart
+  alias: Naprawienie rolet {{ floor.friendly_name | lower }}
+  sequence:
+{% for blind in blinds if blind.floor == floor.id %}
+  - service: mqtt.publish
+    data:
+      topic: "zigbee2mqtt/{{ blind.id }}/get"
+      payload: '{"position": ""}'
+  - delay:
+      seconds: 1
+{% endfor %}
+{% endfor %}
