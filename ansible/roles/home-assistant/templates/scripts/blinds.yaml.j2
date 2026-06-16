@@ -1,109 +1,63 @@
 {%- for floor in floors if floor.has_blinds %}
 {%- for state in [
-    {'action': 'auto', 'state': 'opening', 'friendly_name': 'Automatyczna pozycja', 'desired_state': 'open', 'break_script_prefix': 'close'},
-    {'action': 'open', 'state': 'opening', 'target_position': 100, 'friendly_name': 'Otwieranie', 'desired_state': 'open', 'break_script_prefix': 'close'},
-    {'action': 'close', 'state': 'closing', 'target_position': 0, 'friendly_name': 'Zamykanie', 'desired_state': 'closed', 'break_script_prefix': 'open'},
+    {'action': 'open', 'friendly_name': 'Otwieranie'},
+    {'action': 'close', 'friendly_name': 'Zamykanie'}
 ] %}
 
 {{ state.action }}_{{ floor.id }}_blinds:
   mode: restart
   alias: {{ state.friendly_name }} rolet {{ floor.friendly_name | lower }}
   sequence:
+{% for blind in blinds if blind.floor == floor.id %}
+    - service: cover.{{ state.action }}_cover
+      target:
+        entity_id: cover.{{ blind.id }}
+    - delay:
+        seconds: 1
+{% endfor %}
+{% endfor %}
+
+auto_{{ floor.id }}_blinds:
+  mode: restart
+  alias: Automatyczna pozycja rolet {{ floor.friendly_name | lower }}
+  sequence:
+{% for blind in blinds if blind.floor == floor.id %}
     - variables:
-{% for blind in blinds if blind.floor == floor.id %}
-        {{ blind.id }}_target_position: "{{ state.target_position | default('{{ states(\'input_number.' + blind.id + '_target_position\') }}') }}"
+        {{ blind.id }}_current_position: "{%raw%}{{{%endraw%} state_attr('cover.{{ blind.id }}', 'current_position') | int }}"
+        {{ blind.id }}_target_position: "{%raw%}{{{%endraw%} states('input_number.{{ blind.id }}_target_position') }}"
+    - if:
+      - condition: and
+        conditions:
+        - condition: template
+          value_template: "{% raw %}{{{% endraw %} ({{ blind.id }}_current_position - {{ blind.id}}_target_position) | abs >= 5  }}"
+        - condition: state
+          entity_id: input_boolean.{{ blind.id }}_manually_managed
+          state: "off"
+      then:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
+        - service: cover.set_cover_position
+          data:
+            position: "{%raw %}{{{% endraw %} {{ blind.id }}_target_position }}"
+          target:
+            entity_id:
+              - cover.{{ blind.id }}
+        - delay:
+            seconds: 1
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
 {% endfor %}
 
-    - alias: set state
-      service: input_select.select_option
-      target:
-        entity_id: input_select.blinds_{{ floor.id }}_script_state
-      data:
-        option: "{{ state.state }}"
-    - repeat:
-        sequence:
-{% for blind in blinds if blind.floor == floor.id %}
-          - variables:
-              current_position: "{%raw%}{{{%endraw%} state_attr('cover.{{ blind.id }}', 'current_position') | int }}"
-          - if:
-            - condition: and
-              conditions:
-              - condition: template
-                value_template: "{% raw %}{{{% endraw %} (current_position - {{ blind.id}}_target_position) | abs >= 5  }}"
-              - condition: state
-                entity_id: input_boolean.{{ blind.id }}_manually_managed
-                state: "off"
-            then:
-{% if state.target_position is not defined %}
-              - action: input_boolean.turn_on
-                target:
-                  entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
-{% endif %}
-{% if state.target_position is defined %}
-              - service: cover.{{ state.action }}_cover
-{% else %}
-              - service: cover.set_cover_position
-                data:
-                  position: "{%raw %}{{{% endraw %} {{ blind.id }}_target_position }}"
-{% endif %}
-                target:
-                  entity_id:
-                    - cover.{{ blind.id }}
-          - delay:
-              seconds: 1
-{% if state.target_position is not defined %}
-          - action: input_boolean.turn_off
-            target:
-              entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
-{% endif %}
-{% endfor %}
-          - delay:
-              seconds: 60
-        until:
-          - condition: or
-            conditions:
-            - condition: and
-              conditions:
-{% for blind in blinds if blind.floor == floor.id %}
-              - condition: template
-                value_template: "{% raw %}{{{% endraw %} ((state_attr('cover.{{ blind.id }}', 'current_position') | int) - {{ blind.id }}_target_position | int) | abs < 5 }}"
-{% endfor %}
-              - condition: state
-                entity_id:
-{% for blind in blinds if blind.floor == floor.id %}
-                  - cover.{{ blind.id }}
-{% endfor %}
-                state: {{ state.desired_state }}
-            - "{% raw %}{{{% endraw %} repeat.index >= {{ 1 if state.action == 'auto' else 10 }} }}"
-
-    - alias: unset state
-      service: script.turn_on
-      target:
-        entity_id: script.stop_{{ floor.id }}_blinds
+    - alias: wait for the covers to reach their target position (correct or not)
+      delay:
+        seconds: 30
 
     - alias: run position fixing script
       service: script.turn_on
       target:
         entity_id: script.fix_{{ floor.id }}_blinds_positions
-{% endfor %}
-
-stop_{{ floor.id }}_blinds:
-  mode: restart
-  alias: Zatrzymanie rolet {{ floor.friendly_name | lower }}
-  sequence:
-    - alias: unset state
-      service: input_select.select_option
-      target:
-        entity_id: input_select.blinds_{{ floor.id }}_script_state
-      data:
-        option: "none"
-    - alias: Zatrzymanie rolet
-      service: cover.stop_cover
-      target:
-        entity_id:
-{% for blind in blinds if blind.floor == floor.id %}
-          - cover.{{ blind.id }}
-{% endfor %}
 {% endfor %}
 
 calculate_blind_position:
@@ -240,8 +194,8 @@ fix_{{ floor.id }}_blinds_positions:
 {% for blind in blinds if blind.floor == floor.id %}
   - service: mqtt.publish
     data:
-      topic: "zigbee2mqtt/{{ blind.id }}/get"
-      payload: '{"position": ""}'
+      topic: "zigbee2mqtt/{{ blind.id }}/get/position"
+      payload: ""
   - delay:
       seconds: 1
 {% endfor %}

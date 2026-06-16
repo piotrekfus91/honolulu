@@ -34,8 +34,8 @@ action:
   - delay: "00:00:30"
   - service: mqtt.publish
     data:
-      topic: "zigbee2mqtt/{{ blind_id }}/get"
-      payload: '{"position": ""}'
+      topic: "zigbee2mqtt/{{ blind_id }}/get/position"
+      payload: ""
   - delay: "00:00:03"
   - variables:
       entity_id: !input entity_id
