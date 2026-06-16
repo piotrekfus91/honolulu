@@ -12,3 +12,18 @@
         project: Wspólne
         content: "Zgłosić\_szambo"
         due_date_string: today
+
+- id: pay_septic_tank_disposure
+  alias: Opłacenie wywozu szamba
+  mode: single
+  max_exceeded: silent
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.septic_tank_level_sensor
+      to: "off"
+  action:
+    - service: todoist.new_task
+      data:
+        project: Wspólne
+        content: "Sprawdzić\_czy\_szambo\_opłacone"
+        due_date_string: today
