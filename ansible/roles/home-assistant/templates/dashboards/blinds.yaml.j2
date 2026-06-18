@@ -26,3 +26,26 @@ views:
         {% endfor %}
 {% endfor %}
 {% endfor %}
+
+{%- for floor in floors if floor.has_blinds %}
+
+  - title: {{ floor.friendly_name }} (zaawansowane)
+    path: {{ floor.id }}-advanced
+    cards:
+{%- for blind in blinds if blind.floor == floor.id %}
+
+      - type: entities
+        title: {{ blind.friendly_name }}
+        entities:
+
+          - entity: cover.{{ blind.id }}
+            name: {{ blind.friendly_name }}
+            icon: mdi:blinds
+          - entity: input_boolean.{{ blind.id }}_manually_managed
+            name: {{ blind.friendly_name }} - ręczne ustawianie
+            secondary_info: last-changed
+          - entity: input_boolean.{{ blind.id }}_set_cover_position_by_script
+            name: {{ blind.friendly_name }} - pozycja ustawiana przez skrypt
+            secondary_info: last-changed
+{% endfor %}
+{% endfor %}
