@@ -20,9 +20,6 @@
     input:
       blind: cover.{{ blind.id }}
       blind_manually_managed: input_boolean.{{ blind.id }}_manually_managed
-      close_script: script.close_{{ blind.floor }}_blinds
-      open_script: script.open_{{ blind.floor }}_blinds
-      auto_script: script.auto_{{ blind.floor }}_blinds
 {% if blind.manually_managed_delay is defined %}
       delay: {{ blind.manually_managed_delay }}
 {% endif %}

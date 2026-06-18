@@ -45,9 +45,6 @@ auto_{{ floor.id }}_blinds:
               - cover.{{ blind.id }}
         - delay:
             seconds: 1
-        - action: input_boolean.turn_off
-          target:
-            entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
 {% endfor %}
 
     - alias: wait for the covers to reach their target position (correct or not)
@@ -58,6 +55,12 @@ auto_{{ floor.id }}_blinds:
       service: script.turn_on
       target:
         entity_id: script.fix_{{ floor.id }}_blinds_positions
+
+{% for blind in blinds if blind.floor == floor.id %}
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.{{ blind.id }}_set_cover_position_by_script
+{% endfor %}
 {% endfor %}
 
 calculate_blind_position:
